@@ -12,7 +12,7 @@
     "test:e2e": "nightwatch"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint"
+    "*.{vue}": "eslint"
   },
   "husky": {
     "hooks": {
@@ -38,9 +38,12 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.4.1",
+    "fibers": "^5.0.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.3",
     "nightwatch": "^1.5.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "sass": "^1.32.5",
+    "sass-loader": "^10.1.1"
   }
 }

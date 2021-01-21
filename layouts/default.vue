@@ -1,7 +1,26 @@
 <template>
-  <div>
+  <a-layout id="components-layout-demo-top" class="layout">
+    <a-layout-header>
+      <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
+        <a-menu-item key="1">
+          <NuxtLink to="/">HOME</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="2"
+          ><NuxtLink to="/rules">RULES</NuxtLink></a-menu-item
+        >
+        <a-menu-item key="3"
+          ><NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink></a-menu-item
+        >
+        <a-menu-item key="4"
+          ><NuxtLink to="/factions">FACTIONS</NuxtLink></a-menu-item
+        >
+        <a-menu-item key="5"
+          ><NuxtLink to="/combatLog">COMBAT LOG</NuxtLink></a-menu-item
+        >
+      </a-menu>
+    </a-layout-header>
     <Nuxt />
-  </div>
+  </a-layout>
 </template>
 
 <style>
