@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'crusader',
+    title: 'Telemon Crusade',
     htmlAttrs: {
       lang: 'en',
     },
