@@ -17,6 +17,11 @@
         <a-menu-item key="5"
           ><NuxtLink to="/combatLog">COMBAT LOG</NuxtLink></a-menu-item
         >
+        <a-menu-item key="6" class="submitBR"
+          ><NuxtLink to="/battlereport"
+            >SUBMIT BATTLE REPORT</NuxtLink
+          ></a-menu-item
+        >
       </a-menu>
     </a-layout-header>
     <Nuxt />
@@ -70,5 +75,11 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.submitBR {
+  float: right;
+  margin-left: auto;
+  background-color: #199687;
 }
 </style>

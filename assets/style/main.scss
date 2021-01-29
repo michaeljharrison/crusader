@@ -13,7 +13,7 @@ $border-color-base: #d9d9d9; // major border color
 $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
 
 .ant-layout {
-  background-color: #333;
+  background-color: #000000;
 }
 
 .page-enter-active,
@@ -23,4 +23,17 @@ $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
 .page-enter,
 .page-leave-to {
   opacity: 0;
+}
+
+// ANT COMPONENTS
+.ant-select {
+  width:100% !important;
+  margin-bottom: 20px;
+  font-family: "Conduit itc", sans-serif;
+  .ant-select-selection {
+    
+    .ant-select-selection__rendered {
+      height: 32px;
+    }
+  }
 }

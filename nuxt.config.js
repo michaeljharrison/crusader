@@ -39,7 +39,37 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/firebase',
   ],
+
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyC9_6TRdA5drVlpwpRh1uQ_-gnVqe2ZkNU',
+      authDomain: 'crusader-3cc51.firebaseapp.com',
+      projectId: 'crusader-3cc51',
+      storageBucket: 'crusader-3cc51.appspot.com',
+      messagingSenderId: '177105489838',
+      appId: '1:177105489838:web:baf620bdb633893483423f',
+      measurementId: 'G-MMNYHW03JF',
+    },
+    services: {
+      auth: false,
+      firestore: true,
+      functions: false,
+      storage: false,
+      database: false,
+      messaging: false,
+      performance: false,
+      analytics: false,
+      remoteConfig: false,
+    },
+  },
+
+  firestore: {
+    memoryOnly: false, // default
+    chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', // default
+    enablePersistence: true,
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
