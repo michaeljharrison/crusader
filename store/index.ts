@@ -32,7 +32,6 @@ export const actions = {
       alert(e)
       return
     }
-    alert('Success.')
     commit('SET_isLoading', false)
   },
   // Action to prove a file along with a note using Proofable.
