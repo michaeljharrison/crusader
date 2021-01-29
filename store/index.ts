@@ -1,14 +1,40 @@
-export const state: any = () => ({
-  /*   isLoading: false,        // For loading spinners and buttons. */
+import constants from './constants'
+
+type vuexState = {
+  isLoading: boolean
+}
+
+export const state: any = (): vuexState => ({
+  isLoading: false,
 })
 
 export const mutations = {
-  /*   SET_isLoading(state: State, isLoading: boolean) {
+  SET_isLoading(state: vuexState, isLoading: boolean) {
     state.isLoading = isLoading
-  }, */
+  },
 }
 
 export const actions = {
+  async ACTION_submitBattleReport({ commit }: any, options: any) {
+    commit('SET_isLoading', true) // Start proving (lock UI)
+    // Do some stuff
+    console.log(options)
+    const { report, fire } = options
+    const collectionRef = fire.firestore.collection(
+      constants.COLLECTIONS.BATTLEREPORTS
+    )
+    try {
+      await collectionRef.add({
+        createdOn: new Date(),
+        ...report,
+      })
+    } catch (e) {
+      alert(e)
+      return
+    }
+    alert('Success.')
+    commit('SET_isLoading', false)
+  },
   // Action to prove a file along with a note using Proofable.
   /*  async ACTION_startProving(
     { commit }: any,

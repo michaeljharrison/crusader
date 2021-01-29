@@ -9,120 +9,214 @@
       </p>
       <div class="line"></div>
       <div class="w-form">
-        <form
+        <a-form
           id="wf-form-Battle-Report"
           name="wf-form-Battle-Report"
           data-name="Battle Report"
           _lpchecked="1"
+          :form="form"
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
+          @submit="handleSubmit"
         >
-          <label for="Player-2" class="field-label">Player 1 Team</label>
-          <a-select
-            style="width: 120px"
-            placeholder="Player 1 Team..."
-            @change="selectPlayer1"
-          >
-            <a-select-option
-              v-for="(item, key) in factions"
-              :key="key"
-              :value="item"
+          <a-form-item>
+            <label for="Player" class="field-label">Player 1 Team</label>
+            <a-select
+              v-decorator="[
+                'player1',
+                {
+                  rules: [
+                    { required: true, message: 'Please select first player' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Player 1 Team..."
+              @change="selectPlayer1"
             >
-              {{ item }}
-            </a-select-option> </a-select
-          ><label for="Player" class="field-label">Player 2 Team</label
-          ><a-select
-            style="width: 120px"
-            placeholder="Player 2 Team..."
-            @change="selectPlayer2"
-          >
-            <a-select-option
-              v-for="(item, key) in factions"
-              :key="key"
-              :value="item"
+              <a-select-option
+                v-for="(item, key) in factions"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Player" class="field-label">Player 2 Team</label
+            ><a-select
+              v-decorator="[
+                'player2',
+                {
+                  rules: [
+                    { required: true, message: 'Please select second player' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Player 2 Team..."
+              @change="selectPlayer2"
             >
-              {{ item }}
-            </a-select-option> </a-select
-          ><label for="Game-Type" class="field-label">Game Type</label>
-          <input
-            id="Power-Level"
-            type="text"
-            class="text-field w-input"
-            maxlength="256"
-            name="Power-Level"
-            data-name="Power Level"
-            placeholder="e.g. Sweep and Clear, Recon Patrol, etc."
-            required=""
-          /><label for="Power-Level" class="field-label"
-            >Power Level/Points</label
-          ><a-select
-            style="width: 120px"
-            placeholder="25, 35 etc..."
-            @change="selectPL"
-          >
-            <a-select-option :key="25" :value="25"> 25 </a-select-option>
-            <a-select-option :key="35" :value="35"> 35 </a-select-option>
-            <a-select-option :key="50" :value="50"> 50 </a-select-option>
-            <a-select-option :key="100" :value="100">
-              100
-            </a-select-option> </a-select
-          ><label for="Planet" class="field-label">Planet</label>
-          <p class="hint">
-            (If you forgot to pick one before the battle, agree on a planet with
-            your opponent, or roll randomly)
-          </p>
-          <a-select
-            style="width: 120px"
-            placeholder="Doridia, Kjelstan etc..."
-            @change="selectBattleground"
-          >
-            <a-select-option
-              v-for="(item, key) in battlegrounds"
-              :key="key"
-              :value="item"
+              <a-select-option
+                v-for="(item, key) in factions"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Game-Type" class="field-label">Game Type</label>
+            <a-select
+              v-decorator="[
+                'gameType',
+                {
+                  rules: [
+                    { required: true, message: 'Please select a game type.' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Sweep and Clear, the Relic etc..."
+              @change="selectMission"
             >
-              {{ item }}
-            </a-select-option>
-          </a-select>
-          <label for="Player-3" class="field-label">Winning Team</label>
-          <p class="hint">(In the case of a draw, just write 'Draw')</p>
-          <a-select
-            style="width: 120px"
-            placeholder="Winning team..."
-            @change="selectWinner"
-          >
-            <a-select-option
-              v-for="(item, key) in factions"
-              :key="key"
-              :value="item"
+              <a-select-option
+                v-for="(item, key) in missions"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Power-Level" class="field-label"
+              >Power Level/Points</label
+            ><a-select
+              v-decorator="[
+                'powerLevel',
+                {
+                  rules: [
+                    { required: true, message: 'Please select power level!' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="25, 35 etc..."
+              @change="selectPL"
             >
-              {{ item }}
-            </a-select-option></a-select
+              <a-select-option :key="25" :value="25"> 25 </a-select-option>
+              <a-select-option :key="35" :value="35"> 35 </a-select-option>
+              <a-select-option :key="50" :value="50"> 50 </a-select-option>
+              <a-select-option :key="100" :value="100"> 100 </a-select-option>
+            </a-select></a-form-item
           >
-          <label for="Battle-Report" class="field-label">Battle Report</label
-          ><textarea
-            id="Battle-Report"
-            placeholder="Write any interesting or relevant details about the battle. The more the merrier."
-            maxlength="5000"
-            name="Battle-Report"
-            data-name="Battle Report"
-            class="textarea w-input"
-          ></textarea
-          ><label for="Marked-for-Greatness" class="field-label"
-            >Marked for Greatness</label
-          ><textarea
-            id="Marked-for-Greatness"
-            placeholder='Record here the Marked for Greatness units for both armies (eg. "John the Primaris Captain and Bill the Necron Plasmacyte")'
-            maxlength="5000"
-            name="Marked-for-Greatness"
-            data-name="Marked for Greatness"
-            class="textarea w-input"
-          ></textarea
-          ><input
-            type="submit"
-            value="Submit"
-            data-wait="Please wait..."
-            class="w-button"
-          />
-        </form>
+          <a-form-item>
+            <label for="Planet" class="field-label">Planet</label>
+            <p class="hint">
+              (If you forgot to pick one before the battle, agree on a planet
+              with your opponent, or roll randomly)
+            </p>
+            <a-select
+              v-decorator="[
+                'planet',
+                {
+                  rules: [{ required: true, message: 'Please select planet!' }],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Doridia, Kjelstan etc..."
+              @change="selectBattleground"
+            >
+              <a-select-option
+                v-for="(item, key) in battlegrounds"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Player-3" class="field-label">Winning Team</label>
+            <p class="hint">(In the case of a draw, just write 'Draw')</p>
+            <a-select
+              v-decorator="[
+                'winner',
+                {
+                  rules: [
+                    { required: true, message: 'Please select a winner!' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Winning team..."
+              @change="selectWinner"
+            >
+              <a-select-option
+                v-for="(item, key) in factions"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option></a-select
+            >
+          </a-form-item>
+          <a-form-item>
+            <label for="Battle-Report" class="field-label">Battle Report</label
+            ><a-input
+              id="Battle-Report"
+              v-decorator="[
+                'battleReport',
+                {
+                  rules: [],
+                },
+              ]"
+              placeholder="Write any interesting or relevant details about the battle. The more the merrier."
+              maxlength="5000"
+              name="Battle-Report"
+              data-name="Battle Report"
+              class="textarea w-input"
+            ></a-input>
+          </a-form-item>
+          <a-form-item>
+            <label for="Marked-for-Greatness" class="field-label"
+              >Marked for Greatness</label
+            ><a-input
+              id="Marked-for-Greatness"
+              v-decorator="[
+                'markedForGreatness',
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input both players marked for greatness options.',
+                    },
+                  ],
+                },
+              ]"
+              placeholder='Record here the Marked for Greatness units for both armies (eg. "John the Primaris Captain and Bill the Necron Plasmacyte")'
+              maxlength="5000"
+              name="Marked-for-Greatness"
+              data-name="Marked for Greatness"
+              class="textarea w-input"
+            ></a-input>
+          </a-form-item>
+          <a-form-item>
+            <a-button
+              type="primary"
+              html-type="submit"
+              value="Submit"
+              data-wait="Please wait..."
+              class="w-button"
+            >
+              Submit
+            </a-button>
+          </a-form-item>
+        </a-form>
         <div class="w-form-done">
           <div>Thank you! Your submission has been received!</div>
         </div>
@@ -143,6 +237,7 @@ export default {
   data() {
     const battlegrounds: any[] = []
     const factions: any[] = []
+    const missions: any[] = []
     const pl: number = 25
     return {
       loading: false,
@@ -151,12 +246,17 @@ export default {
       pl: 25,
       battlegrounds,
       factions,
+      missions,
       winner: '',
       selectedBattleground: '',
+      selectedMission: '',
       selectedPlayer1: '',
       selectedPlayer2: '',
+      formLayout: 'horizontal',
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     }
   },
+  computed: mapState(['isLoading']),
   watch: {
     // call again the method if the route changes
     $route: 'fetchData',
@@ -170,6 +270,30 @@ export default {
     this.fetchData()
   },
   methods: {
+    handleSubmit(e: Event) {
+      e.preventDefault()
+      this.form.validateFields(async (err: any, values: any) => {
+        if (!err) {
+          console.log(values)
+          this.$message.loading(`Submitting battle report...`)
+          try {
+            await this.$store.dispatch('ACTION_submitBattleReport', {
+              fire: this.$fire,
+              report: values,
+            })
+            this.$message.success(`Battle Report Submitted.`)
+          } catch (e) {
+            console.error(e)
+            this.$message.error(
+              `Warp storms have caused this battle report to be lost!`
+            )
+            this.$store.commit('SET_isLoading', false)
+          } finally {
+            // Cleanup
+          }
+        }
+      })
+    },
     selectBattleground(planet: string) {
       this.selectedBattleground = planet
     },
@@ -184,6 +308,9 @@ export default {
     },
     selectWinner(winner: string) {
       this.winner = winner
+    },
+    selectMission(mission: string) {
+      this.mission = mission
     },
     async fetchData() {
       this.error = this.post = null
@@ -222,6 +349,24 @@ export default {
         vm.factions = []
         docs.forEach((faction: any) => {
           vm.factions.push(faction.data().name)
+        })
+      } catch (e) {
+        alert(e)
+      }
+
+      const missionsRef = this.$fire.firestore.collection(
+        constants.COLLECTIONS.MISSIONS
+      )
+      try {
+        const snapshot = await missionsRef.get()
+        const docs = snapshot.docs
+        if (!docs) {
+          alert('Document does not exist.')
+          return
+        }
+        vm.missions = []
+        docs.forEach((mission: any) => {
+          vm.missions.push(mission.data().name)
         })
       } catch (e) {
         alert(e)
