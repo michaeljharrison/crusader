@@ -20,45 +20,16 @@
             one planet holds a small T'au population, the system itself is
             relatively unclaimed from a military perspective.
           </p>
-          <h1 class="h5">Telemon Prime</h1>
-          <p class="paragraph">
-            Although Telemon Prime was home to an Imperium settlement centuries
-            ago, it has long been abandoned. The settlers themselves were
-            declared lost after communication ceased from the colony, however
-            the Imperium declared the colony too unimportant to investigate
-            further. It's surface is mostly barren, with pockets of ancient
-            Imperium ruins scattered across the landscape.
-          </p>
-          <h1 class="h5">Kjelstan</h1>
-          <p class="paragraph">
-            Once a location of interest due to Blackstone deposits, Kjelstan has
-            since become yet another backwater of the Imperium of Man. Home to a
-            small Imperial Guard garrison, the planet is under the tenuous
-            control of Marshal Krol Valdu. The garrison itself has not seen
-            reinforcement or resupply in many years, and serves more as a
-            communication hub for the sector, rather than a military garrison.
-          </p>
-          <h1 class="h5">Orna'kir</h1>
-          <p class="paragraph">
-            Chosen as home for a band of T’au defectors, Orna’kir now features a
-            number of bustling T’au settlements across it’s two continents.
-            Though their resources are limited, the T’au have managed to
-            construct a number of basic orbital defenses near their largest
-            towns. Their reasons behind choosing Orna’kir as their home are
-            unknown, but rumours have spread that the T’au have settled here in
-            the hopes of uncovering ancient relics from their own past that will
-            disrupt the Ethereal leadership of the empire.
-          </p>
-          <h1 class="h5">Doridia</h1>
-          <p class="paragraph">
-            Since the strange energy signals started emanating from Doridia,
-            scanners have been unable to penetrate the planet’s atmosphere. Many
-            attempts to reach the surface have seemingly failed, as
-            communication is severed with any object that attempts to venture
-            within. Imperial surveys from centuries ago show the planet to be
-            wholly unremarkable, thus leaving the source of the anomaly a
-            mystery.
-          </p>
+          <div
+            v-for="(item, key) in battlegrounds"
+            :key="key"
+            class="battleground"
+          >
+            <h1 class="h5">{{ item.name }}</h1>
+            <p class="paragraph">
+              {{ item.description }}
+            </p>
+          </div>
         </div>
       </div>
       <div class="sectionmain-vert">
@@ -66,6 +37,8 @@
           <div class="collection-list-wrapper-3 w-dyn-list">
             <div role="list" class="w-dyn-items w-row">
               <div
+                v-for="(item, key) in battlegrounds"
+                :key="key"
                 role="listitem"
                 class="collection-item-4 w-dyn-item w-col w-col-3"
               >
@@ -81,7 +54,7 @@
                   "
                   class="image-planet"
                 />
-                <h1 class="h2">Telemon Prime</h1>
+                <h1 class="h2">{{ item.name }}</h1>
                 <h1 class="h5">Controlled by:</h1>
                 <h1 class="h5 grey w-condition-invisible">Contested</h1>
                 <h1 style="color: hsla(304, 100%, 35.82%, 1)" class="h5">
@@ -90,135 +63,11 @@
                 <div class="div-extract">
                   <h1 class="h6">Combat Effect</h1>
                   <div class="paragraph i">
-                    Littered with the remnants of ancient Imperium technology,
-                    Telemon Prime has many resources and artefacts that could
-                    prove an advantage in the battles to come.
+                    {{ item.rulesFluff }}
                   </div>
                   <div class="line"></div>
                   <div class="paragraph">
-                    Before the start of Battle Round 1, after all units have
-                    deployed, roll 1D6. On a 1-4, nothing happens. On a 5-6, the
-                    dense imperial ruins wreak havoc on your deployment. Both
-                    players must select 1 additional unit to begin the game in
-                    strategic reserves.
-                  </div>
-                </div>
-              </div>
-              <div
-                role="listitem"
-                class="collection-item-4 w-dyn-item w-col w-col-3"
-              >
-                <img
-                  loading="lazy"
-                  src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47a30775a55b02f54723_Kjelstan.png"
-                  alt=""
-                  sizes="300px"
-                  srcset="
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47a30775a55b02f54723_Kjelstan-p-500.png  500w,
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47a30775a55b02f54723_Kjelstan-p-800.png  800w,
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47a30775a55b02f54723_Kjelstan.png       1000w
-                  "
-                  class="image-planet"
-                />
-                <h1 class="h2">Kjelstan</h1>
-                <h1 class="h5">Controlled by:</h1>
-                <h1 class="h5 grey">Contested</h1>
-                <h1 class="h5 w-dyn-bind-empty"></h1>
-                <div class="div-extract">
-                  <h1 class="h6">Combat Effect</h1>
-                  <div class="paragraph i">
-                    Blackstone is highly valued across the galaxy, and although
-                    it has been mined almost to depletion, Kjelstan still holds
-                    small deposits of the precious mineral below it's surface.
-                  </div>
-                  <div class="line"></div>
-                  <div class="paragraph">
-                    Before the start of Battle Round 1, after all units have
-                    deployed, number each table quarter. Roll 1D6.On a 1-4,
-                    nothing happens.On a 5-6, Blackstone deposits are detected
-                    in the area. If either player finishes the game with at
-                    least one unit in all four table quarters, they receive +1
-                    RP.
-                  </div>
-                </div>
-              </div>
-              <div
-                role="listitem"
-                class="collection-item-4 w-dyn-item w-col w-col-3"
-              >
-                <img
-                  loading="lazy"
-                  src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47b36a97265c113b33bc_Ornakir.png"
-                  alt=""
-                  sizes="300px"
-                  srcset="
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47b36a97265c113b33bc_Ornakir-p-500.png  500w,
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47b36a97265c113b33bc_Ornakir-p-800.png  800w,
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47b36a97265c113b33bc_Ornakir.png       1000w
-                  "
-                  class="image-planet"
-                />
-                <h1 class="h2">Orna'kir</h1>
-                <h1 class="h5">Controlled by:</h1>
-                <h1 class="h5 grey">Contested</h1>
-                <h1 class="h5 w-dyn-bind-empty"></h1>
-                <div class="div-extract">
-                  <h1 class="h6">Combat Effect</h1>
-                  <div class="paragraph i">
-                    Though the Tau population of Orna'kir is mostly civilian,
-                    they have built a number of defences that will make short
-                    work of any invaders attempting to tresspass into their
-                    settlements.
-                  </div>
-                  <div class="line"></div>
-                  <div class="paragraph">
-                    Before the start of Battle Round 1, after all units have
-                    deployed, roll 1D6.On a 1-4, nothing happens.On a 5-6, the
-                    nearby Tau colony has fortified the area with weapon
-                    emplacements. During Battle Rounds 1-2, units that would
-                    enter the battlefield from any battlefield edge must do so
-                    from their own edge.
-                  </div>
-                </div>
-              </div>
-              <div
-                role="listitem"
-                class="collection-item-4 w-dyn-item w-col w-col-3"
-              >
-                <img
-                  loading="lazy"
-                  src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47c49be53b8f720ee712_Doridia.png"
-                  alt=""
-                  sizes="300px"
-                  srcset="
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47c49be53b8f720ee712_Doridia-p-500.png  500w,
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47c49be53b8f720ee712_Doridia-p-800.png  800w,
-                    https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffe47c49be53b8f720ee712_Doridia.png       1000w
-                  "
-                  class="image-planet"
-                />
-                <h1 class="h2">Doridia</h1>
-                <h1 class="h5">Controlled by:</h1>
-                <h1 class="h5 grey w-condition-invisible">Contested</h1>
-                <h1 style="color: hsla(0, 100%, 36.16%, 1)" class="h5">
-                  The Omnissiah's Explorator
-                </h1>
-                <div class="div-extract">
-                  <h1 class="h6">Combat Effect</h1>
-                  <div class="paragraph i">
-                    Doridia is important to the war effort for one reason alone
-                    - tracking the mysterious energy signal. The skirmishes that
-                    take place upon the surface are simply a distraction to the
-                    primary goal.
-                  </div>
-                  <div class="line"></div>
-                  <div class="paragraph">
-                    At the end of the movement phase, you may select a single
-                    INFANTRY unit to perform the Scanner Sweep action. If they
-                    do so, add 1 to that players' Scanner Sweep tally.At the end
-                    of the battle, the player who has performed the most Scanner
-                    Sweeps receives +1 RP. In the case of a tie, both players
-                    receive +1 RP.
+                    {{ item.rules }}
                   </div>
                 </div>
               </div>
@@ -420,25 +269,61 @@
 </template>
 
 <script lang="ts">
-/* import { mapState } from 'vuex'
-import VueJsonPretty from 'vue-json-pretty'
-// What we export here will be avaliable in our template.
+import { mapState } from 'vuex'
+import constants from '~/store/constants'
+import { Battleground } from '~/store/types'
 export default {
-  components: {
-    VueJsonPretty,    // To help us render the JSON properly.
-  },
   transition: 'page',
   data() {
-  // These are our local variables.
+    const battlegrounds: Battleground[] = []
     return {
-      formLayout: 'horizontal',
-      form: this.$form.createForm(this, { name: 'coordinated' }),
-      uploading: false,
-      fileList: [],
+      loading: false,
+      error: null,
+      post: null,
+      battlegrounds,
     }
   },
+  watch: {
+    // call again the method if the route changes
+    $route: 'fetchData',
+  },
   // This allows us to use our global state within this page.
-  computed: mapState(['isLoading', 'currentProof']),
+  // computed: mapState(['isLoading', 'currentProof']),
   // Our methods will go here...
-} */
+  created() {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData()
+  },
+  methods: {
+    async fetchData() {
+      this.error = this.post = null
+      this.loading = true
+      const fetchedId = this.$route.params.id
+      // replace `getPost` with your data fetching util / API wrapper
+      const battlegroundsRef = this.$fire.firestore.collection(
+        constants.COLLECTIONS.BATTLEGROUNDS
+      )
+      const vm = this
+      try {
+        const snapshot = await battlegroundsRef.get()
+        const docs = snapshot.docs
+        if (!docs) {
+          alert('Document does not exist.')
+          return
+        }
+        vm.battlegrounds = []
+        docs.forEach((battleground: any) => {
+          console.log(battleground.data())
+          vm.battlegrounds.push(battleground.data())
+        })
+      } catch (e) {
+        alert(e)
+      }
+      // make sure this request is the last one we did, discard otherwise
+      if (vm.$route.params.id !== fetchedId) return
+      this.loading = false
+    },
+  },
+}
 </script>

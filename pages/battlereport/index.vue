@@ -155,14 +155,13 @@
               placeholder="Winning team..."
               @change="selectWinner"
             >
-              <a-select-option
-                v-for="(item, key) in factions"
-                :key="key"
-                :value="item"
-              >
-                {{ item }}
-              </a-select-option></a-select
-            >
+              <a-select-option :key="selectedPlayer1" :value="selectedPlayer1">
+                {{ selectedPlayer1 }}
+              </a-select-option>
+              <a-select-option :key="selectedPlayer2" :value="selectedPlayer2">
+                {{ selectedPlayer2 }}
+              </a-select-option>
+            </a-select>
           </a-form-item>
           <a-form-item>
             <label for="Battle-Report" class="field-label">Battle Report</label

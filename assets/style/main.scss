@@ -37,3 +37,26 @@ $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
     }
   }
 }
+
+// TABLES
+
+
+.ant-table-wrapper {
+  padding: 10px;
+
+.ant-table-thead > tr > th {
+  
+}
+
+td {
+  font-family: 'Conduit itc', sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+tr:hover {
+  td {
+    background-color: #303030 !important;
+  }
+}
+}

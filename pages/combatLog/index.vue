@@ -1,44 +1,108 @@
 <template>
   <div class="container">
     <div class="bigcontainer">
-      <div class="sectionmain">
-        <div class="div-block">
-          <img
-            src="https://uploads-ssl.webflow.com/5ffaaef8d5a5677efda12f0e/5ffd013fc61ef58a0f613cc2_Webclip.png"
-            loading="lazy"
-            alt=""
-            class="icon-big"
-          />
-          <h1 class="h1">WORK IN PROGRESS</h1>
-          <h1 class="h2">This page coming soon.</h1>
-          <p class="paragraph">
-            As war rages across the galaxy, a
-            <strong>strange, powerful energy signal </strong>is detected by
-            Imperium astropaths in the <strong>Telemon </strong>system. Telemon
-            is dangerously close to a number of Imperial outposts, and a threat
-            from that system is an unacceptable risk. A small Astra Militarum
-            fleet is sent to investigate the signal, discover the source, and
-            destroy any threats they might find. Upon entering the system,
-            contact is immediately lost. Hours later, a single message is
-            received via long-range communications...<br />
-          </p>
-          <p class="paragraph">
-            Shortly after the signal is received, the mysterious energy reading
-            vanishes. The Eternal Fire appears to have succeeded. Not wasting
-            any time, the Imperium deploys additional assets to the Telemon
-            system.<br /><br />However, Mankind are not the only ones to have
-            detected the signal. In a nearby system, an ancient Necron tomb
-            awakens, inexplicably drawn to the mysterious anomoly. Likewise, on
-            the planet Kjelstan, a dormant Genestealer Cult awakens from their
-            slumber, sensing an opportunity to spread their infection to those
-            who seek the energy source.<br /><br />Whether they are Xenos or
-            Man, any faction close enough to detect the signal is sure to
-            investigate. And as is always the case in the 41st Millenium, that
-            can mean only war.<br />
-          </p>
-          <div class="line"></div>
-        </div>
-      </div>
+      <h1 class="h2">Leaderboard</h1>
+      <a-table :columns="columnsLeaderboard" :data-source="data"> </a-table>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import constants from '~/store/constants'
+import { Faction } from '~/store/types'
+const columnsLeaderboard = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Faction',
+    dataIndex: 'faction',
+    key: 'faction',
+  },
+  {
+    title: 'Player Name',
+    dataIndex: 'player',
+    key: 'address',
+  },
+  {
+    title: 'Played',
+    key: 'played',
+    dataIndex: 'played',
+  },
+  {
+    title: 'Won',
+    key: 'won',
+    dataIndex: 'won',
+  },
+  {
+    title: 'Win Ratio',
+    key: 'winRate',
+    dataIndex: 'winRate',
+  },
+]
+
+const data: any[] = []
+export default {
+  data() {
+    return {
+      data,
+      columnsLeaderboard,
+    }
+  },
+
+  watch: {
+    // call again the method if the route changes
+    $route: 'fetchData',
+  },
+  // This allows us to use our global state within this page.
+  // computed: mapState(['isLoading', 'currentProof']),
+  // Our methods will go here...
+  created() {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData()
+  },
+  methods: {
+    async fetchData() {
+      this.error = this.post = null
+      this.loading = true
+      const fetchedId = this.$route.params.id
+      // replace `getPost` with your data fetching util / API wrapper
+      const factionsRef = this.$fire.firestore.collection(
+        constants.COLLECTIONS.FACTIONS
+      )
+      const vm = this
+      try {
+        const snapshot = await factionsRef.get()
+        const docs = snapshot.docs
+        if (!docs) {
+          alert('Document does not exist.')
+          return
+        }
+        vm.data = []
+        docs.forEach((faction: any) => {
+          const f: Faction = faction.data()
+          f.winRate = `${Math.round((f.won / f.played) * 100)}%`
+          vm.data.push(f)
+        })
+      } catch (e) {
+        alert(e)
+      }
+      // make sure this request is the last one we did, discard otherwise
+      if (vm.$route.params.id !== fetchedId) return
+      this.loading = false
+    },
+  },
+}
+</script>
+
+<style>
+.container {
+  margin: unset !important;
+}
+.bigcontainer {
+  flex-grow: 1 !important;
+}
+</style>

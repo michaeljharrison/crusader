@@ -27,7 +27,7 @@
       "@nuxt/types",
       "@nuxtjs/firebase",
       "@nuxtjs/antd",
-      "@types/node"
+      "@types/node",
     ]
   },
   "exclude": [
