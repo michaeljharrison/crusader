@@ -19,6 +19,7 @@ export interface Faction {
   summary: string
   won: number
   winRate: string
+  warzonePoints: any[]
 }
 
 export interface Battleground {

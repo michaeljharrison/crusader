@@ -15,6 +15,7 @@ const columnsLeaderboard = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
+    defaultSortOrder: 'descend',
   },
   {
     title: 'Faction',
@@ -30,16 +31,22 @@ const columnsLeaderboard = [
     title: 'Played',
     key: 'played',
     dataIndex: 'played',
+    sorter: (a, b) => a.played > b.played,
   },
   {
     title: 'Won',
     key: 'won',
     dataIndex: 'won',
+    sorter: (a, b) => a.won > b.won,
   },
   {
     title: 'Win Ratio',
     key: 'winRate',
     dataIndex: 'winRate',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) =>
+      Math.round((a.won / a.played) * 100) >
+      Math.round((b.won / b.played) * 100),
   },
 ]
 
