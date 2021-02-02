@@ -37,26 +37,44 @@ export const actions = {
       })
 
       // Get both player objects.
-      const player1Ref: any = await factionsRef.doc(report.player1)
-      const player2Ref: any = await factionsRef.doc(report.player2)
+      const player1Ref: any = await getFaction(report.player1, factionsRef)
+      const player2Ref: any = await getFaction(report.player2, factionsRef)
       const player1Data: any = await player1Ref.get()
       const player2Data: any = await player2Ref.get()
 
-      const p1WZPoints: any = player1Data.data().warzonePoints
-      const p2WZPoints: any = player2Data.data().warzonePoints
+      const p1WZPoints: any = player1Data.data().warzonePoints || {}
+      const p2WZPoints: any = player2Data.data().warzonePoints || {}
 
       let winnerRef: any
       let winnerData: any
       if (report.winner === report.player1) {
+        // PLAYER 1 WINS
         winnerRef = player1Ref
         winnerData = player1Data
-        p1WZPoints[report.planet] += 3
-        p2WZPoints[report.planet] += 1
+        if (p1WZPoints[report.planet] >= 0) {
+          p1WZPoints[report.planet] += 3
+        } else {
+          p1WZPoints[report.planet] = 3
+        }
+        if (p2WZPoints[report.planet] >= 0) {
+          p2WZPoints[report.planet] += 1
+        } else {
+          p2WZPoints[report.planet] = 1
+        }
       } else {
+        // PLAYER 2 WINS
         winnerRef = player2Ref
         winnerData = player2Data
-        p1WZPoints[report.planet] += 1
-        p2WZPoints[report.planet] += 3
+        if (p1WZPoints[report.planet] >= 0) {
+          p1WZPoints[report.planet] += 1
+        } else {
+          p1WZPoints[report.planet] = 1
+        }
+        if (p2WZPoints[report.planet] >= 0) {
+          p2WZPoints[report.planet] += 3
+        } else {
+          p2WZPoints[report.planet] = 3
+        }
       }
 
       // Update played.
@@ -82,4 +100,17 @@ export const actions = {
     }
     commit('SET_isLoading', false)
   },
+}
+
+const getFaction: any = async (name: string, collectionRef: any) => {
+  let ref: any = await collectionRef.doc(name)
+  if (!ref.exists) {
+    // Try lower case.
+    ref = await collectionRef.doc(name.toLowerCase())
+  }
+  if (!ref.exists) {
+    // Try upper case.
+    ref = await collectionRef.doc(name.toUpperCase())
+  }
+  return ref
 }

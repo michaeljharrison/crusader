@@ -314,6 +314,7 @@ export default {
         }
         vm.battlegrounds = []
         docs.forEach((battleground: any) => {
+          console.log(battleground)
           console.log(battleground.data())
           vm.battlegrounds.push(battleground.data())
         })
