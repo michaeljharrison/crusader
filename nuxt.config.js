@@ -74,6 +74,16 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
+  router: {
+    routes: [
+      {
+        name: 'factions-name',
+        path: '/factions/:name?',
+        component: 'pages/factions/_name.vue',
+      },
+    ],
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend(config, ctx) {

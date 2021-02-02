@@ -15,10 +15,8 @@
                 {{ (faction && faction.name) || 'Loading...' }}
               </h1>
             </div>
-            <a
-              href="/teams/cult-of-the-lightning-eaters"
-              class="button w-button"
-              >SEE DETAILS</a
+            <NuxtLink class="button w-button" :to="'/factions/' + slug"
+              >SEE DETAILS</NuxtLink
             >
           </div>
           <h1 class="h3 fade">
@@ -83,7 +81,12 @@
 </template>
 
 <script lang="ts">
+const slugify = require('slugify')
+
 export default {
   props: ['faction'],
+  data() {
+    return { slug: slugify(this.faction.name) }
+  },
 }
 </script>

@@ -1,4 +1,5 @@
 export interface BattleReport {
+  createdOn: any
   battleReport: string
   gameType: string
   markedForGreatness: string
