@@ -581,13 +581,10 @@
 </template>
 
 <script lang="ts">
-const slugify = require('slugify')
-
 export default {
   props: ['faction'],
   async asyncData({ params }) {
     const name = params.name
-    console.log(name)
     return { name }
   },
   data() {
