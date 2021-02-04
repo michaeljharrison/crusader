@@ -56,7 +56,7 @@ export default {
       auth: false,
       firestore: true,
       functions: false,
-      storage: false,
+      storage: true,
       database: false,
       messaging: false,
       performance: false,
