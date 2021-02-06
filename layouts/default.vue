@@ -5,23 +5,21 @@
         <a-menu-item key="1">
           <NuxtLink to="/">HOME</NuxtLink>
         </a-menu-item>
-        <a-menu-item key="2"
-          ><NuxtLink to="/rules">RULES</NuxtLink></a-menu-item
-        >
-        <a-menu-item key="3"
-          ><NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink></a-menu-item
-        >
-        <a-menu-item key="4"
-          ><NuxtLink to="/factions">FACTIONS</NuxtLink></a-menu-item
-        >
-        <a-menu-item key="5"
-          ><NuxtLink to="/combatLog">COMBAT LOG</NuxtLink></a-menu-item
-        >
-        <a-menu-item key="6" class="submitBR"
-          ><NuxtLink to="/battlereport"
-            >SUBMIT BATTLE REPORT</NuxtLink
-          ></a-menu-item
-        >
+        <a-menu-item key="2">
+          <NuxtLink to="/rules">RULES</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="3">
+          <NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="4">
+          <NuxtLink to="/factions">FACTIONS</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="5">
+          <NuxtLink to="/combatLog">COMBAT LOG</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="6" class="submitBR">
+          <NuxtLink to="/battlereport">SUBMIT BATTLE REPORT</NuxtLink>
+        </a-menu-item>
       </a-menu>
     </a-layout-header>
     <Nuxt />

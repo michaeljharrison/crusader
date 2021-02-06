@@ -28,7 +28,7 @@ $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
 // ANT COMPONENTS
 .ant-select {
   width: 100% !important;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-family: 'Conduit itc', sans-serif;
   .ant-select-selection {
     .ant-select-selection__rendered {
@@ -36,6 +36,18 @@ $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
     }
   }
 }
+
+.ant-select {
+  width: 100% !important;
+  margin-bottom: 40px;
+  font-family: 'Conduit itc', sans-serif;
+  .ant-select-selection {
+    .ant-select-selection__rendered {
+      height: 32px;
+    }
+  }
+}
+
 .ant-carousel >>> .slick-slide {
   text-align: center;
   height: 160px;
