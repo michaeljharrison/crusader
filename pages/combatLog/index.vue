@@ -13,90 +13,98 @@
 
 <script lang="ts">
 import constants from '~/store/constants'
-import { BattleReport, Faction } from '~/store/types'
+import { BattleReport, Faction, Team } from '~/store/types'
 const columnsLeaderboard = [
   {
     title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    defaultSortOrder: 'descend',
+    dataIndex: 'Name',
+    key: 'Name',
+    // defaultSortOrder: 'descend',
   },
   {
     title: 'Faction',
-    dataIndex: 'faction',
-    key: 'faction',
+    dataIndex: 'Faction',
+    key: 'Faction',
   },
   {
     title: 'Player Name',
-    dataIndex: 'player',
-    key: 'address',
+    dataIndex: 'Player',
+    key: 'Player',
   },
   {
     title: 'Played',
-    key: 'played',
-    dataIndex: 'played',
-    sorter: (a, b) => a.played > b.played,
+    key: 'Battles Played',
+    dataIndex: 'Battles Played',
+    sorter: (a: Team, b: Team) => a['Battles Played'] > b['Battles Played'],
   },
   {
     title: 'Won',
-    key: 'won',
-    dataIndex: 'won',
-    sorter: (a, b) => a.won > b.won,
+    key: 'Battles Won',
+    dataIndex: 'Battles Won',
+    sorter: (a: Team, b: Team) => a['Battles Won'] > b['Battles Won'],
   },
   {
     title: 'Win Ratio',
     key: 'winRate',
     dataIndex: 'winRate',
     defaultSortOrder: 'descend',
-    sorter: (a, b) =>
-      Math.round((a.won / a.played) * 100) >
-      Math.round((b.won / b.played) * 100),
+    sorter: (a: Team, b: Team) =>
+      Math.round((a['Battles Won'] / a['Battles Played']) * 100) >
+      Math.round((b['Battles Won'] / b['Battles Played']) * 100),
   },
 ]
 const columnsBattleLog = [
+    {
+    title: 'Name',
+    key: 'Name',
+    dataIndex: 'Name',
+    // defaultSortOrder: 'descend',
+    sorter: (a: BattleReport, b: BattleReport) => a.Name > b.Name,
+  },
   {
     title: 'Date',
-    key: 'createdOn',
+    key: 'Created On',
+    dataIndex: 'Created On',
     defaultSortOrder: 'descend',
-    sorter: (a, b) => a.createdOn > b.createdOn,
-    slots: { title: 'customTitle' },
-    scopedSlots: { customRender: 'date' },
+    sorter: (a: BattleReport, b: BattleReport) => Date.parse(a['Created On']) > Date.parse(b['Created On']),
+    // slots: { title: 'customTitle' },
+    // scopedSlots: { customRender: 'date' },
   },
   {
     title: 'Planet',
-    dataIndex: 'planet',
-    key: 'planet',
-    sorter: (a, b) => a.planet > b.planet,
+    dataIndex: 'Battleground',
+    key: 'Battleground',
+    sorter: (a: BattleReport, b: BattleReport) => a.Battleground > b.Battleground,
   },
   {
     title: 'Team 1',
-    dataIndex: 'player1',
-    key: 'player1',
-    sorter: (a, b) => a.player1 > b.player1,
+    dataIndex: 'Team 1',
+    key: 'Team 1',
+    sorter: (a: BattleReport, b: BattleReport) => a['Team 1'] > b['Team 1'],
   },
   {
     title: 'Team 2',
-    dataIndex: 'player2',
-    key: 'player2',
-    sorter: (a, b) => a.player2 > b.player2,
+    dataIndex: 'Team 2',
+    key: 'Team 2',
+    sorter: (a: BattleReport, b: BattleReport) => a['Team 2'] > b['Team 2'],
   },
   {
-    title: 'Mode',
-    dataIndex: 'gameType',
-    key: 'gameType',
-    sorter: (a, b) => a.gameType > b.gameType,
+    title: 'Mission',
+    dataIndex: 'Mission',
+    key: 'Mission',
+    sorter: (a: BattleReport, b: BattleReport) => a.Mission > b.Mission,
   },
   {
     title: 'PL',
-    key: 'powerLevel',
-    dataIndex: 'powerLevel',
-    sorter: (a, b) => a.powerLevel > b.powerLevel,
+    key: 'Power Level',
+    dataIndex: 'Power Level',
+    sorter: (a: BattleReport, b: BattleReport) => a['Power Level'] > b['Power Level'],
   },
   {
     title: 'Winner',
-    key: 'winner',
-    dataIndex: 'winner',
-    sorter: (a, b) => a.winner > b.winner,
+    key: 'Winning Team',
+    dataIndex: 'Winning Team',
+    sorter: (a: BattleReport, b: BattleReport) => a['Winning Team'] > b['Winning Team'],
   },
 ]
 
@@ -132,7 +140,7 @@ export default {
       const fetchedId = this.$route.params.id
       // replace `getPost` with your data fetching util / API wrapper
       const factionsRef = this.$fire.firestore.collection(
-        constants.COLLECTIONS.FACTIONS
+        constants.COLLECTIONS.TEAMS
       )
       const vm = this
       try {
@@ -143,10 +151,10 @@ export default {
           return
         }
         vm.data = []
-        docs.forEach((faction: any) => {
-          const f: Faction = faction.data()
-          f.winRate = `${Math.round((f.won / f.played) * 100)}%`
-          vm.data.push(f)
+        docs.forEach((teamDoc: any) => {
+          const t: Team = teamDoc.data()
+          t.winRate = `${Math.round((t['Battles Won'] / t['Battles Played']) * 100)}%`
+          vm.data.push(t)
         })
       } catch (e) {
         alert(e)
@@ -174,13 +182,10 @@ export default {
         vm.brData = []
         docs.forEach((battleReport: any) => {
           const br: BattleReport = battleReport.data()
-          if (br.createdOn) {
-            const t = new Date(1970, 0, 1) // Epoch
-            t.setSeconds(br.createdOn.seconds)
-            br.createdOn = t.toString()
+          if (br['Created On']) {
+            const d = new Date(Date.parse(br['Created On']))
+             br['Created On']=  d.toDateString()
           }
-
-          console.log(br)
           vm.brData.push(br)
         })
       } catch (e) {

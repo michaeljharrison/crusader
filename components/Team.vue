@@ -12,23 +12,23 @@
                 class="image-5"
               />
               <h1 class="h1">
-                {{ (team && team.Name) || 'Loading...' }}
+                {{ (faction && faction.name) || 'Loading...' }}
               </h1>
             </div>
-            <NuxtLink class="button w-button" :to="'/teams/' + slug"
+            <NuxtLink class="button w-button" :to="'/factions/' + slug"
               >SEE DETAILS</NuxtLink
             >
           </div>
           <h1 class="h3 fade">
-            {{ (team && factionString) || 'Loading...' }}
+            {{ (faction && faction.faction) || 'Loading...' }}
           </h1>
         </div>
         <div class="div-team-header">
           <p class="paragraph">
-            {{ (team && team.Flavour) || 'Loading...' }}
+            {{ (faction && faction.summary) || 'Loading...' }}
           </p>
-          <p v-if="team.FlavourQoute" class="paragraph qoute">
-            {{ (team && team.FlavourQoute) || 'Loading...' }}
+          <p v-if="faction.quote" class="paragraph qoute">
+            {{ (faction && faction.quote) || 'Loading...' }}
           </p>
         </div>
         <div class="table">
@@ -39,12 +39,12 @@
           <div class="tablerow tablerow-alt">
             <div class="tablecell">
               <h1 class="h6">
-                {{ (team && team['Battles Played']) || 'Loading...' }}
+                {{ (faction && faction.played) || 'Loading...' }}
               </h1>
             </div>
             <div class="tablecell">
               <h1 class="h6">
-                {{ (team && team['Battles Won']) || 'Loading...' }}
+                {{ (faction && faction.won) || 'Loading...' }}
               </h1>
             </div>
           </div>
@@ -66,13 +66,13 @@
             "
             class="img-team"
           />
-          <h1 v-if="team.Leader" class="h5">Leader:</h1>
-          <h1 v-if="team.Leader" class="h3">
-            {{ (team && team.Leader) || 'Loading...' }}
+          <h1 v-if="faction.leader" class="h5">Leader:</h1>
+          <h1 v-if="faction.leader" class="h3">
+            {{ (faction && faction.leader) || 'Loading...' }}
           </h1>
-          <h1 v-if="team" class="h5">Champion:</h1>
-          <h1 v-if="team['Crusade Champion']" class="h3">
-            {{ (team && team['Crusade Champion']) || 'Loading...' }}
+          <h1 v-if="faction.champion" class="h5">Champion:</h1>
+          <h1 v-if="faction.champion" class="h3">
+            {{ (faction && faction.champion) || 'Loading...' }}
           </h1>
         </div>
       </div>
@@ -81,16 +81,12 @@
 </template>
 
 <script lang="ts">
-import { Team } from '~/store/types';
 const slugify = require('slugify')
 
 export default {
   props: ['faction'],
   data() {
-
-    const team: Team = this.faction;
-    const factionString: String = team.Faction.replace('-',' ');
-    return { slug: team.Slug, team, factionString }
+    return { slug: slugify(this.faction.name) }
   },
 }
 </script>

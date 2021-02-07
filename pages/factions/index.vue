@@ -42,7 +42,7 @@ export default {
       const fetchedId = this.$route.params.id
       // replace `getPost` with your data fetching util / API wrapper
       const factionsRef = this.$fire.firestore.collection(
-        constants.COLLECTIONS.FACTIONS
+        constants.COLLECTIONS.TEAMS
       )
       const vm = this
       try {
