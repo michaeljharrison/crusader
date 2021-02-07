@@ -3,7 +3,7 @@
     <div class="bigcontainer">
       <h1 class="h1">The Factions of the telemon crusade</h1>
       <div class="line"></div>
-      <Faction v-for="(item, key) in factions" :key="key" :faction="item" />
+      <FactionTwo v-for="(item, key) in factions" :key="key" :faction="item" />
     </div>
   </div>
 </template>
