@@ -55,15 +55,10 @@
           <img
             loading="lazy"
             width="317"
-            src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840.jpg"
+            :src="team.FeaturePhoto"
             alt=""
             sizes="(max-width: 767px) 200px, (max-width: 991px) 300px, 400px"
-            srcset="
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840-p-1080.jpeg 1080w,
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840-p-1600.jpeg 1600w,
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840-p-2000.jpeg 2000w,
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840.jpg         2280w
-            "
+            :srcset="team.Gallery"
             class="img-team"
           />
           <h1 v-if="team.Leader" class="h5">Leader:</h1>

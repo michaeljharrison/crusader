@@ -12,7 +12,7 @@
           <NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink>
         </a-menu-item>
         <a-menu-item key="4">
-          <NuxtLink to="/factions">FACTIONS</NuxtLink>
+          <NuxtLink to="/teams">TEAMS</NuxtLink>
         </a-menu-item>
         <a-menu-item key="5">
           <NuxtLink to="/combatLog">COMBAT LOG</NuxtLink>
