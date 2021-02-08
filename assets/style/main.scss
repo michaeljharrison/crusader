@@ -1,5 +1,5 @@
-$primary-color: #1890ff; // primary color for all components
-$link-color: #1890ff; // link color
+$primary-color: #66adad; // primary color for all components
+$link-color: #66a4ad; // link color
 $success-color: #52c41a; // success state color
 $warning-color: #faad14; // warning state color
 $error-color: #f5222d; // error state color
@@ -27,36 +27,56 @@ $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
 
 // ANT COMPONENTS
 .ant-select {
-  width:100% !important;
-  margin-bottom: 20px;
-  font-family: "Conduit itc", sans-serif;
+  width: 100% !important;
+  margin-bottom: 10px;
+  font-family: 'Conduit itc', sans-serif;
   .ant-select-selection {
-    
     .ant-select-selection__rendered {
       height: 32px;
     }
   }
 }
 
-// TABLES
+.ant-select {
+  width: 100% !important;
+  margin-bottom: 40px;
+  font-family: 'Conduit itc', sans-serif;
+  .ant-select-selection {
+    .ant-select-selection__rendered {
+      height: 32px;
+    }
+  }
+}
 
+.ant-carousel >>> .slick-slide {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.ant-carousel >>> .slick-slide h3 {
+  color: #fff;
+}
+
+// TABLES
 
 .ant-table-wrapper {
   padding: 10px;
 
-.ant-table-thead > tr > th {
-  
-}
-
-td {
-  font-family: 'Conduit itc', sans-serif;
-  color: #fff;
-  text-transform: uppercase;
-}
-
-tr:hover {
-  td {
-    background-color: #303030 !important;
+  .ant-table-thead > tr > th {
   }
-}
+
+  td {
+    font-family: 'Conduit itc', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  tr:hover {
+    td {
+      background-color: #303030 !important;
+    }
+  }
 }

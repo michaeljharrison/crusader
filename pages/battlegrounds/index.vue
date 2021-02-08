@@ -77,192 +77,7 @@
       </div>
       <div class="sectionmain-vert">
         <h1 class="h2">war zone points</h1>
-        <div class="table div-block-14">
-          <div class="tablerow">
-            <div class="tablecell-battles"><h1 class="h6">Team</h1></div>
-            <div class="tablecell-battles">
-              <h1 class="h6">Telemon Prime</h1>
-            </div>
-            <div class="tablecell-battles"><h1 class="h6">Kjelstan</h1></div>
-            <div class="tablecell-battles"><h1 class="h6">Orna'kir</h1></div>
-            <div class="tablecell-battles"><h1 class="h6">doridia</h1></div>
-          </div>
-          <div class="collection-list-table w-dyn-list">
-            <div role="list" class="w-dyn-items">
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1a6b13eff64888ae039_Genestealer%20Cults.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1
-                    style="color: hsla(186, 100%, 38.49%, 1)"
-                    class="h6 winner"
-                  >
-                    Cult of the Lightning Eaters
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffd70dcfa5473b42b27c179_Chaos.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1
-                    style="color: hsla(275, 100%, 76.12%, 1)"
-                    class="h6 winner"
-                  >
-                    Heralds of the Writhing Night
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">1</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">1</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/600102020c27edfa0dd29f4d_Mortarian%27s%20Anvil.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1
-                    style="color: hsla(102, 100%, 29.49%, 1)"
-                    class="h6 winner"
-                  >
-                    Mortarian's Anvil - 5th Sepsis Cohort
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">1</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">1</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffd70dcfa5473b42b27c179_Chaos.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1
-                    style="color: hsla(86, 100%, 72.77%, 1)"
-                    class="h6 winner"
-                  >
-                    Nurgle Uprising
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffb785b7a74dff6530f8b19_Tempest%20Legion.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1 style="color: hsla(271, 100%, 50%, 1)" class="h6 winner">
-                    Tempest Legion 2nd Company
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/60068d17808235152eb078db_Eldar.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1 style="color: hsla(29, 100%, 50%, 1)" class="h6 winner">
-                    The Coronas Eldar
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffac0e0d1eabc5ba1b501a7_Adeptus%20Mechanicus.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1 style="color: hsla(0, 100%, 36.16%, 1)" class="h6 winner">
-                    The Omnissiah's Explorator
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">1</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">4</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffed4e64cc919c0b93a508f_Drukhari.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1
-                    style="color: hsla(171, 100%, 30.16%, 1)"
-                    class="h6 winner"
-                  >
-                    The Reavers Banquet
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">1</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-              </div>
-              <div role="listitem" class="collection-item-table w-dyn-item">
-                <div class="tablecell-battles alignleft">
-                  <img
-                    loading="lazy"
-                    src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffabefec715f8832e4eb18a_Necron.svg"
-                    alt=""
-                    class="icon-battletable"
-                  />
-                  <h1
-                    style="color: hsla(304, 100%, 35.82%, 1)"
-                    class="h6 winner"
-                  >
-                    The Tamrekh Dynasty
-                  </h1>
-                </div>
-                <div class="tablecell-battles"><h1 class="h6">4</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">0</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">2</h1></div>
-                <div class="tablecell-battles"><h1 class="h6">3</h1></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <a-table :columns="columnsLeaderboard" :data-source="data"> </a-table>
       </div>
     </div>
   </div>
@@ -271,7 +86,16 @@
 <script lang="ts">
 import { mapState } from 'vuex'
 import constants from '~/store/constants'
-import { Battleground } from '~/store/types'
+import { Battleground, Faction } from '~/store/types'
+const data: any = []
+const columnsLeaderboard = [
+  {
+    title: 'Team',
+    dataIndex: 'team',
+    key: 'team',
+    sorter: (a, b) => a.team.length > b.team.length,
+  },
+]
 export default {
   transition: 'page',
   data() {
@@ -280,6 +104,8 @@ export default {
       loading: false,
       error: null,
       post: null,
+      data,
+      columnsLeaderboard,
       battlegrounds,
     }
   },
@@ -304,20 +130,44 @@ export default {
       const battlegroundsRef = this.$fire.firestore.collection(
         constants.COLLECTIONS.BATTLEGROUNDS
       )
+      const factionsRef = this.$fire.firestore.collection(
+        constants.COLLECTIONS.FACTIONS
+      )
       const vm = this
       try {
         const snapshot = await battlegroundsRef.get()
+        const factions = await factionsRef.get()
         const docs = snapshot.docs
+        const factionDocs = factions.docs
         if (!docs) {
           alert('Document does not exist.')
           return
         }
+
+        // Battlegrounds.
         vm.battlegrounds = []
         docs.forEach((battleground: any) => {
-          console.log(battleground)
-          console.log(battleground.data())
-          vm.battlegrounds.push(battleground.data())
+          const bg: Battleground = battleground.data()
+          vm.battlegrounds.push(bg)
+          vm.columnsLeaderboard.push({
+            dataIndex: bg.name,
+            key: bg.name,
+            title: bg.name,
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a[bg.name] > b[bg.name],
+          })
         })
+
+        // Factions
+        factionDocs.forEach((faction: any) => {
+          const f: Faction = faction.data()
+          vm.data.push({
+            team: f.name,
+            ...f.warzonePoints,
+          })
+        })
+
+        // Determine
       } catch (e) {
         alert(e)
       }

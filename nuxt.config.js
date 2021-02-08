@@ -19,8 +19,8 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'ant-design-vue/dist/antd.css',
-    '@/assets/style/main.scss',
     '@/assets/style/base.scss',
+    '@/assets/style/main.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -56,7 +56,7 @@ export default {
       auth: false,
       firestore: true,
       functions: false,
-      storage: false,
+      storage: true,
       database: false,
       messaging: false,
       performance: false,
@@ -73,6 +73,16 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  router: {
+    routes: [
+      {
+        name: 'factions-name',
+        path: '/factions/:name?',
+        component: 'pages/factions/_name.vue',
+      },
+    ],
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

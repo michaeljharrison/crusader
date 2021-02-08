@@ -12,25 +12,23 @@
                 class="image-5"
               />
               <h1 class="h1">
-                {{ (faction && faction.name) || 'Loading...' }}
+                {{ (team && team.Name) || 'Loading...' }}
               </h1>
             </div>
-            <a
-              href="/teams/cult-of-the-lightning-eaters"
-              class="button w-button"
-              >SEE DETAILS</a
+            <NuxtLink class="button w-button" :to="'/teams/' + slug"
+              >SEE DETAILS</NuxtLink
             >
           </div>
           <h1 class="h3 fade">
-            {{ (faction && faction.faction) || 'Loading...' }}
+            {{ (team && factionString) || 'Loading...' }}
           </h1>
         </div>
         <div class="div-team-header">
           <p class="paragraph">
-            {{ (faction && faction.summary) || 'Loading...' }}
+            {{ (team && team.Flavour) || 'Loading...' }}
           </p>
-          <p v-if="faction.quote" class="paragraph qoute">
-            {{ (faction && faction.quote) || 'Loading...' }}
+          <p v-if="team.FlavourQoute" class="paragraph qoute">
+            {{ (team && team.FlavourQoute) || 'Loading...' }}
           </p>
         </div>
         <div class="table">
@@ -41,12 +39,12 @@
           <div class="tablerow tablerow-alt">
             <div class="tablecell">
               <h1 class="h6">
-                {{ (faction && faction.played) || 'Loading...' }}
+                {{ (team && team['Battles Played']) || 'Loading...' }}
               </h1>
             </div>
             <div class="tablecell">
               <h1 class="h6">
-                {{ (faction && faction.won) || 'Loading...' }}
+                {{ (team && team['Battles Won']) || 'Loading...' }}
               </h1>
             </div>
           </div>
@@ -57,24 +55,19 @@
           <img
             loading="lazy"
             width="317"
-            src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840.jpg"
+            :src="team.FeaturePhoto"
             alt=""
             sizes="(max-width: 767px) 200px, (max-width: 991px) 300px, 400px"
-            srcset="
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840-p-1080.jpeg 1080w,
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840-p-1600.jpeg 1600w,
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840-p-2000.jpeg 2000w,
-              https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1c78244a55aa105ca7a_PXL_20210110_103304840.jpg         2280w
-            "
+            :srcset="team.Gallery"
             class="img-team"
           />
-          <h1 v-if="faction.leader" class="h5">Leader:</h1>
-          <h1 v-if="faction.leader" class="h3">
-            {{ (faction && faction.leader) || 'Loading...' }}
+          <h1 v-if="team.Leader" class="h5">Leader:</h1>
+          <h1 v-if="team.Leader" class="h3">
+            {{ (team && team.Leader) || 'Loading...' }}
           </h1>
-          <h1 v-if="faction.champion" class="h5">Champion:</h1>
-          <h1 v-if="faction.champion" class="h3">
-            {{ (faction && faction.champion) || 'Loading...' }}
+          <h1 v-if="team" class="h5">Champion:</h1>
+          <h1 v-if="team['Crusade Champion']" class="h3">
+            {{ (team && team['Crusade Champion']) || 'Loading...' }}
           </h1>
         </div>
       </div>
@@ -83,7 +76,16 @@
 </template>
 
 <script lang="ts">
+import { Team } from '~/store/types';
+const slugify = require('slugify')
+
 export default {
   props: ['faction'],
+  data() {
+
+    const team: Team = this.faction;
+    const factionString: String = team.Faction.replace('-',' ');
+    return { slug: team.Slug, team, factionString }
+  },
 }
 </script>

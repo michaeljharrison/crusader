@@ -33,3 +33,8 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 npm install -g firebase-tools
 firebase deploy --only hosting:crusader
+
+# Test!
+
+git config --global user.name "michaeljharrison"
+git config --global user.email "michael.j.harrison@outlook.com"
