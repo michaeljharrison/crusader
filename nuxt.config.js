@@ -33,6 +33,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/svg',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -80,6 +81,11 @@ export default {
         name: 'factions-name',
         path: '/factions/:name?',
         component: 'pages/factions/_name.vue',
+      },
+      {
+        name: 'report-name',
+        path: '/combatLog/:name?',
+        component: 'pages/combatLog/_name.vue',
       },
     ],
   },

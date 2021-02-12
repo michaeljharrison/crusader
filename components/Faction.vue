@@ -5,12 +5,7 @@
         <div class="div-team-header">
           <div class="div-team-name">
             <div class="div-block-18">
-              <img
-                loading="lazy"
-                src="https://uploads-ssl.webflow.com/5ffabe3b5e2c100f43b302cc/5ffcc1a6b13eff64888ae039_Genestealer%20Cults.svg"
-                alt=""
-                class="image-5"
-              />
+              <TeamIcon :teamSlug="team.Slug" />
               <h1 class="h1">
                 {{ (team && team.Name) || 'Loading...' }}
               </h1>
@@ -76,15 +71,18 @@
 </template>
 
 <script lang="ts">
-import { Team } from '~/store/types';
+import { Team } from '~/store/types'
 const slugify = require('slugify')
+import TeamIcon from '~/components/TeamIcon.vue'
 
 export default {
   props: ['faction'],
+  components: {
+    TeamIcon,
+  },
   data() {
-
-    const team: Team = this.faction;
-    const factionString: String = team.Faction.replace('-',' ');
+    const team: Team = this.faction
+    const factionString: String = team.Faction.replace('-', ' ')
     return { slug: team.Slug, team, factionString }
   },
 }

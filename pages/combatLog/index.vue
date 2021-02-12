@@ -2,9 +2,20 @@
   <div class="container">
     <div class="bigcontainer">
       <h1 class="h2">Leaderboard</h1>
-      <a-table :columns="columnsLeaderboard" :data-source="data"> </a-table>
+      <a-table :columns="columnsLeaderboard" :data-source="data">
+        <div class="row center" slot="Name" slot-scope="Name, record">
+          <TeamIcon :teamSlug="record.Slug"></TeamIcon>
+          {{ Name }}
+        </div>
+      </a-table>
       <h1 class="h2">BattleLog</h1>
       <a-table :columns="columnsBattleLog" :data-source="brData">
+        <NuxtLink
+          slot="Name"
+          slot-scope="Name, record"
+          :to="'/combatLog/' + record.Slug"
+          >{{ Name }}</NuxtLink
+        >
         <span slot="date" slot-scope="br">{{ br.createdOn }}</span>
       </a-table>
     </div>
@@ -13,12 +24,14 @@
 
 <script lang="ts">
 import constants from '~/store/constants'
+import TeamIcon from '~/components/TeamIcon.vue'
 import { BattleReport, Faction, Team } from '~/store/types'
 const columnsLeaderboard = [
   {
     title: 'Name',
     dataIndex: 'Name',
     key: 'Name',
+    scopedSlots: { customRender: 'Name' },
     // defaultSortOrder: 'descend',
   },
   {
@@ -54,10 +67,11 @@ const columnsLeaderboard = [
   },
 ]
 const columnsBattleLog = [
-    {
+  {
     title: 'Name',
     key: 'Name',
     dataIndex: 'Name',
+    scopedSlots: { customRender: 'Name' },
     // defaultSortOrder: 'descend',
     sorter: (a: BattleReport, b: BattleReport) => a.Name > b.Name,
   },
@@ -66,7 +80,8 @@ const columnsBattleLog = [
     key: 'Created On',
     dataIndex: 'Created On',
     defaultSortOrder: 'descend',
-    sorter: (a: BattleReport, b: BattleReport) => Date.parse(a['Created On']) > Date.parse(b['Created On']),
+    sorter: (a: BattleReport, b: BattleReport) =>
+      Date.parse(a['Created On']) > Date.parse(b['Created On']),
     // slots: { title: 'customTitle' },
     // scopedSlots: { customRender: 'date' },
   },
@@ -74,7 +89,8 @@ const columnsBattleLog = [
     title: 'Planet',
     dataIndex: 'Battleground',
     key: 'Battleground',
-    sorter: (a: BattleReport, b: BattleReport) => a.Battleground > b.Battleground,
+    sorter: (a: BattleReport, b: BattleReport) =>
+      a.Battleground > b.Battleground,
   },
   {
     title: 'Team 1',
@@ -98,13 +114,15 @@ const columnsBattleLog = [
     title: 'PL',
     key: 'Power Level',
     dataIndex: 'Power Level',
-    sorter: (a: BattleReport, b: BattleReport) => a['Power Level'] > b['Power Level'],
+    sorter: (a: BattleReport, b: BattleReport) =>
+      a['Power Level'] > b['Power Level'],
   },
   {
     title: 'Winner',
     key: 'Winning Team',
     dataIndex: 'Winning Team',
-    sorter: (a: BattleReport, b: BattleReport) => a['Winning Team'] > b['Winning Team'],
+    sorter: (a: BattleReport, b: BattleReport) =>
+      a['Winning Team'] > b['Winning Team'],
   },
 ]
 
@@ -119,7 +137,9 @@ export default {
       columnsBattleLog,
     }
   },
-
+  components: {
+    TeamIcon,
+  },
   watch: {
     // call again the method if the route changes
     $route: 'fetchData',
@@ -153,7 +173,9 @@ export default {
         vm.data = []
         docs.forEach((teamDoc: any) => {
           const t: Team = teamDoc.data()
-          t.winRate = `${Math.round((t['Battles Won'] / t['Battles Played']) * 100)}%`
+          t.winRate = `${Math.round(
+            (t['Battles Won'] / t['Battles Played']) * 100
+          )}%`
           vm.data.push(t)
         })
       } catch (e) {
@@ -184,7 +206,7 @@ export default {
           const br: BattleReport = battleReport.data()
           if (br['Created On']) {
             const d = new Date(Date.parse(br['Created On']))
-             br['Created On']=  d.toDateString()
+            br['Created On'] = d.toDateString()
           }
           vm.brData.push(br)
         })

@@ -54,6 +54,24 @@
           Millenium, that can mean only war.<br />
         </p>
         <div class="line"></div>
+        <div class="stack">
+          <div class="half">
+            <h2 class="h2">
+              Transmissions & Recordings
+            </h2>
+            <a-timeline>
+          <LoreFragment v-for="(item, key) in loreFragments" :key="key" :fragment="item" ></LoreFragment>
+        </a-timeline>
+          </div>
+          <div class="half 2">
+            <h2 class="h2">
+              Combat Reports
+            </h2>
+            <a-timeline>
+          <BattleReport v-for="(item, key) in battleReports" :key="key" :fragment="item" ></BattleReport>
+        </a-timeline>3
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -63,20 +81,25 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import constants from '~/store/constants'
+import LoreFragment from '~/components/LoreFragment.vue';
+import { BattleReport, LoreFragment as Lore } from '~/store/types';
 
 export default Vue.extend({
   transition: 'page',
   data() {
-    const factions: any[] = []
+    const loreFragments: Lore[] = []
+    const battleReports: BattleReport[] = []
     const images: any[] = []
     return {
       loading: false,
-      images: [],
+      images,
       error: null,
       post: null,
-      factions,
+      loreFragments,
+      battleReports,
     }
   },
+  components: {LoreFragment},
   watch: {
     // call again the method if the route changes
     $route: 'fetchData',
@@ -113,20 +136,29 @@ export default Vue.extend({
       this.loading = true
       const fetchedId = this.$route.params.id
       // replace `getPost` with your data fetching util / API wrapper
-      const factionsRef = this.$fire.firestore.collection(
-        constants.COLLECTIONS.FACTIONS
+      const loreRef = this.$fire.firestore.collection(
+        constants.COLLECTIONS.LORE
+      )
+      const battleReportsRef = this.$fire.firestore.collection(
+        constants.COLLECTIONS.BATTLEREPORTS
       )
       const vm = this
       try {
-        const snapshot = await factionsRef.get()
+        const snapshot = await loreRef.get()
+        const brSnapshot = await battleReportsRef.get();
         const docs = snapshot.docs
+        const brDocs = brSnapshot.docs;
         if (!docs) {
           alert('Document does not exist.')
           return
         }
-        vm.factions = []
-        docs.forEach((faction: any) => {
-          vm.factions.push(faction.data())
+        vm.loreFragments = []
+        vm.battleReports = []
+        docs.forEach((lore: any) => {
+          vm.loreFragments.push(lore.data())
+        })
+        brDocs.forEach((br: any) => {
+          vm.battleReports.push(br.data())
         })
       } catch (e) {
         alert(e)
@@ -140,6 +172,20 @@ export default Vue.extend({
 </script>
 
 <style>
+.h2 {
+  margin-bottom: 10px;
+}
+.stack {
+  display: flex;
+  flex-direction: row;
+}
+.half {
+  width: 50%;
+  flex: 1;
+}
+.half.right {
+  margin-left: 10px;
+}
 .container {
   flex-direction: column;
 }

@@ -81,3 +81,12 @@ Slug:string
 'Updated On':string
 'Winning Team':string
 }
+
+export interface LoreFragment {
+  Contents: string,
+  'Created On': string,
+  Icon: String,
+  Name: string,
+  'Related Team': string,
+  Slug: string
+}

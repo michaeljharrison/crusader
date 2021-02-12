@@ -30,6 +30,9 @@
       "@types/node",
     ]
   },
+  "files": [
+    "custom.d.ts"
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",
