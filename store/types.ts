@@ -1,15 +1,3 @@
-export interface BattleReport {
-  createdOn: any
-  battleReport: string
-  gameType: string
-  markedForGreatness: string
-  planet: string
-  player1: string
-  player2: string
-  powerLevel: number
-  winner: string
-}
-
 export interface Faction {
   faction: string
   leader: string

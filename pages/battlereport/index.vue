@@ -23,7 +23,7 @@
             <label for="Player" class="field-label">Player 1 Team</label>
             <a-select
               v-decorator="[
-                'player1',
+                'Team 1',
                 {
                   rules: [
                     { required: true, message: 'Please select first player' },
@@ -47,7 +47,7 @@
             <label for="Player" class="field-label">Player 2 Team</label
             ><a-select
               v-decorator="[
-                'player2',
+                'Team 2',
                 {
                   rules: [
                     { required: true, message: 'Please select second player' },
@@ -71,7 +71,7 @@
             <label for="Game-Type" class="field-label">Game Type</label>
             <a-select
               v-decorator="[
-                'gameType',
+                'Mission',
                 {
                   rules: [
                     { required: true, message: 'Please select a game type.' },
@@ -96,7 +96,7 @@
               >Power Level/Points</label
             ><a-select
               v-decorator="[
-                'powerLevel',
+                'Power Level',
                 {
                   rules: [
                     { required: true, message: 'Please select power level!' },
@@ -121,7 +121,7 @@
             </p>
             <a-select
               v-decorator="[
-                'planet',
+                'Battleground',
                 {
                   rules: [{ required: true, message: 'Please select planet!' }],
                 },
@@ -144,7 +144,7 @@
             <p class="hint">(In the case of a draw, just write 'Draw')</p>
             <a-select
               v-decorator="[
-                'winner',
+                'Winning Team',
                 {
                   rules: [
                     { required: true, message: 'Please select a winner!' },
@@ -168,7 +168,7 @@
             ><a-input
               id="Battle-Report"
               v-decorator="[
-                'battleReport',
+                'Battle Report',
                 {
                   rules: [],
                 },
@@ -186,7 +186,7 @@
             ><a-input
               id="Marked-for-Greatness"
               v-decorator="[
-                'markedForGreatness',
+                'Marked for Greatness',
                 {
                   rules: [
                     {
@@ -336,7 +336,7 @@ export default {
       }
 
       const factionsRef = this.$fire.firestore.collection(
-        constants.COLLECTIONS.FACTIONS
+        constants.COLLECTIONS.TEAMS
       )
       try {
         const snapshot = await factionsRef.get()
@@ -347,7 +347,7 @@ export default {
         }
         vm.factions = []
         docs.forEach((faction: any) => {
-          vm.factions.push(faction.data().name)
+          vm.factions.push(faction.data().Name)
         })
       } catch (e) {
         alert(e)

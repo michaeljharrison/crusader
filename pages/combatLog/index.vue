@@ -14,7 +14,7 @@
           slot="Name"
           slot-scope="Name, record"
           :to="'/combatLog/' + record.Slug"
-          >{{ Name }}</NuxtLink
+          >{{ Name || 'UNAMED BATTLE' }}</NuxtLink
         >
         <span slot="date" slot-scope="br">{{ br.createdOn }}</span>
       </a-table>
@@ -203,7 +203,13 @@ export default {
         }
         vm.brData = []
         docs.forEach((battleReport: any) => {
+          console.log(battleReport)
           const br: BattleReport = battleReport.data()
+          console.log(battleReport.data())
+          if (!br['Name']) {
+            br['Name'] = battleReport.id
+            br['Slug'] = battleReport.id
+          }
           if (br['Created On']) {
             const d = new Date(Date.parse(br['Created On']))
             br['Created On'] = d.toDateString()

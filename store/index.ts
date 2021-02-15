@@ -26,8 +26,8 @@ export const actions = {
     const collectionRef = fire.firestore.collection(
       constants.COLLECTIONS.BATTLEREPORTS
     )
-    const factionsRef = fire.firestore.collection(
-      constants.COLLECTIONS.FACTIONS
+    const teamsRef = fire.firestore.collection(
+      constants.COLLECTIONS.TEAMS
     )
     try {
       // Create Battle Report.
@@ -37,43 +37,50 @@ export const actions = {
       })
 
       // Get both player objects.
-      const player1Ref: any = await getFaction(report.player1, factionsRef)
-      const player2Ref: any = await getFaction(report.player2, factionsRef)
-      const player1Data: any = await player1Ref.get()
-      const player2Data: any = await player2Ref.get()
+      const player1Ref: any = await getFaction(report['Team 1'].toLowerCase().replace(/ /g, '-',).replace(/'/g, ''), teamsRef)
+      const player2Ref: any = await getFaction(report['Team 2'].toLowerCase().replace(/ /g, '-').replace(/'/g, ''), teamsRef)
+      console.log(player1Ref);
+      console.log(player2Ref);
+      const player1Data: any = await player1Ref.get();
+      const player2Data: any = await player2Ref.get();
+      console.log(player1Data);
+      console.log(player2Data);
+      const p1 = player1Data.data();
+      const p2 = player2Data.data();
 
-      const p1WZPoints: any = player1Data.data().warzonePoints || {}
-      const p2WZPoints: any = player2Data.data().warzonePoints || {}
+      // console.log(player1Data);
+      const p1WZPoints: any = p1.warzonePoints || {}
+      const p2WZPoints: any = p2.warzonePoints || {}
 
       let winnerRef: any
       let winnerData: any
-      if (report.winner === report.player1) {
+      if (report['Winning Team'] === report['Team 1']) {
         // PLAYER 1 WINS
         winnerRef = player1Ref
-        winnerData = player1Data
-        if (p1WZPoints[report.planet] >= 0) {
-          p1WZPoints[report.planet] += 3
+        winnerData = p1
+        if (p1WZPoints[report.Battleground] >= 0) {
+          p1WZPoints[report.Battleground] += 3
         } else {
-          p1WZPoints[report.planet] = 3
+          p1WZPoints[report.Battleground] = 3
         }
-        if (p2WZPoints[report.planet] >= 0) {
-          p2WZPoints[report.planet] += 1
+        if (p2WZPoints[report.Battleground] >= 0) {
+          p2WZPoints[report.Battleground] += 1
         } else {
-          p2WZPoints[report.planet] = 1
+          p2WZPoints[report.Battleground] = 1
         }
       } else {
         // PLAYER 2 WINS
         winnerRef = player2Ref
-        winnerData = player2Data
-        if (p1WZPoints[report.planet] >= 0) {
-          p1WZPoints[report.planet] += 1
+        winnerData = p2
+        if (p1WZPoints[report.Battleground] >= 0) {
+          p1WZPoints[report.Battleground] += 1
         } else {
-          p1WZPoints[report.planet] = 1
+          p1WZPoints[report.Battleground] = 1
         }
-        if (p2WZPoints[report.planet] >= 0) {
-          p2WZPoints[report.planet] += 3
+        if (p2WZPoints[report.Battleground] >= 0) {
+          p2WZPoints[report.Battleground] += 3
         } else {
-          p2WZPoints[report.planet] = 3
+          p2WZPoints[report.Battleground] = 3
         }
       }
 
@@ -81,20 +88,22 @@ export const actions = {
 
       await player1Ref.update({
         played:
-          (player1Data.data().played && player1Data.data().played + 1) || 1,
+          (p1.played && p1.played + 1) || 1,
         warzonePoints: p1WZPoints,
       })
       await player2Ref.update({
         played:
-          (player2Data.data().played && player2Data.data().played + 1) || 1,
+          (p2.played && p2.played + 1) || 1,
         warzonePoints: p2WZPoints,
       })
 
       // Update Winner.
       await winnerRef.update({
-        won: (winnerData.data().won && winnerData.data().won + 1) || 1,
+        won: (winnerData.won && winnerData.won + 1) || 1,
       })
+      console.log('FIN!');
     } catch (e) {
+      console.log(e);
       alert(e)
       return
     }
@@ -103,14 +112,18 @@ export const actions = {
 }
 
 const getFaction: any = async (name: string, collectionRef: any) => {
+  console.log(`Finding faction ${name}`);
   let ref: any = await collectionRef.doc(name)
-  if (!ref.exists) {
+  let doc: any = await ref.get();
+  if (!doc.exists) {
     // Try lower case.
-    ref = await collectionRef.doc(name.toLowerCase())
+    console.log('Cant find doc, trying lower case');
+    doc = await collectionRef.doc(name.toLowerCase())
   }
-  if (!ref.exists) {
+  if (!doc.exists) {
     // Try upper case.
-    ref = await collectionRef.doc(name.toUpperCase())
+    console.log('Cant find doc, trying upper case');
+    doc = await collectionRef.doc(name.toUpperCase())
   }
   return ref
 }
