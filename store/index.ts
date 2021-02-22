@@ -34,7 +34,7 @@ export const actions = {
       await collectionRef.add({
         'Created On': new Date(Date.now()).toDateString(),
         ...report,
-        disabled: true
+        Disabled: true
       })
 
       // Get both player objects.
