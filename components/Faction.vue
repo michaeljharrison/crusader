@@ -6,7 +6,7 @@
           <div class="div-team-name">
             <div class="div-block-18">
               <TeamIcon :teamSlug="team.Slug" />
-              <h1 class="h1">
+              <h1 class="h1" :style="color">
                 {{ (team && team.Name) || 'Loading...' }}
               </h1>
             </div>
@@ -82,8 +82,9 @@ export default {
   },
   data() {
     const team: Team = this.faction
+    const color: String = `color: ${team.TeamColor}`
     const factionString: String = team.Faction.replace('-', ' ')
-    return { slug: team.Slug, team, factionString }
+    return { slug: team.Slug, team, factionString, color }
   },
 }
 </script>

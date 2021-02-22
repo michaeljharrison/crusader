@@ -5,7 +5,7 @@
       <a-table :columns="columnsLeaderboard" :data-source="data">
         <div class="row center" slot="Name" slot-scope="Name, record">
           <TeamIcon :teamSlug="record.Slug"></TeamIcon>
-          {{ Name }}
+          <p :style="record.TeamColor">{{ Name }}</p>
         </div>
       </a-table>
       <h1 class="h2">BattleLog</h1>
@@ -176,6 +176,7 @@ export default {
           t.winRate = `${Math.round(
             (t['Battles Won'] / t['Battles Played']) * 100
           )}%`
+          t.TeamColor = `color: ${t.TeamColor}`
           vm.data.push(t)
         })
       } catch (e) {

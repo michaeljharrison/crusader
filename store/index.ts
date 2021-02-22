@@ -167,7 +167,7 @@ const getBattleReport: any = async ( report: BattleReport, collectionRef: any ) 
   return ref
 }
 
-const getBattleGround: any = async ( bg: String,) => {
+export const getBattleGround: any = async ( bg: String,) => {
   console.log(`Finding BG ${bg}`);
   bg = bg.replace(/'/, '');
   const bgArray: string[] = bg.split(' ');

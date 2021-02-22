@@ -103,6 +103,22 @@ h6 {
     font-family: 'Conduit itc', sans-serif;
     color: #fff;
     text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
+    align-self: center;
+    font-family: 'Conduit itc',sans-serif;
+    color: #fff;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: uppercase;
   }
 
   tr:hover {
@@ -127,6 +143,7 @@ h6 {
 
 .battleReport {
   .right {
+    display: flex;
     flex-direction: row;
   }
 }

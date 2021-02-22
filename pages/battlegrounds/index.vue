@@ -57,8 +57,8 @@
                 <h1 class="h2">{{ item.name }}</h1>
                 <h1 class="h5">Controlled by:</h1>
                 <h1 class="h5 grey w-condition-invisible">Contested</h1>
-                <h1 style="color: hsla(304, 100%, 35.82%, 1)" class="h5">
-                  The Tamrekh Dynasty
+                <h1 :style="item.color" class="h5">
+                  {{ item.winner }}
                 </h1>
                 <div class="div-extract">
                   <h1 class="h6">Combat Effect</h1>
@@ -85,8 +85,9 @@
 
 <script lang="ts">
 import { mapState } from 'vuex'
+import { getBattleGround } from '~/store/index'
 import constants from '~/store/constants'
-import { Battleground, Faction } from '~/store/types'
+import { Battleground, Faction, Team } from '~/store/types'
 const data: any = []
 const columnsLeaderboard = [
   {
@@ -131,7 +132,7 @@ export default {
         constants.COLLECTIONS.BATTLEGROUNDS
       )
       const factionsRef = this.$fire.firestore.collection(
-        constants.COLLECTIONS.FACTIONS
+        constants.COLLECTIONS.TEAMS
       )
       const vm = this
       try {
@@ -146,24 +147,40 @@ export default {
 
         // Battlegrounds.
         vm.battlegrounds = []
-        docs.forEach((battleground: any) => {
+        docs.forEach(async (battleground: any) => {
           const bg: Battleground = battleground.data()
           vm.battlegrounds.push(bg)
+          const bgName = await getBattleGround(bg.name)
           vm.columnsLeaderboard.push({
-            dataIndex: bg.name,
-            key: bg.name,
+            dataIndex: `WZP-${bgName}`,
+            key: `WZP-${bgName}`,
             title: bg.name,
             defaultSortOrder: 'descend',
-            sorter: (a, b) => a[bg.name] > b[bg.name],
+            sorter: (a, b) => a[`WZP-${bgName}`] > b[`WZP-${bgName}`],
           })
         })
 
         // Factions
         factionDocs.forEach((faction: any) => {
-          const f: Faction = faction.data()
+          const f: Team = faction.data()
+          const row: Object = {}
+          Object.keys(f).forEach((key) => {
+            if (key.match(/WZP/)) {
+              row[key] = f[key]
+            }
+          })
           vm.data.push({
-            team: f.name,
-            ...f.warzonePoints,
+            team: f.Name,
+            ...row,
+          })
+
+          vm.battlegrounds.forEach(async (bg) => {
+            const bgName = await getBattleGround(bg.name)
+            if (!bg.winningPoints || bg.winningPoints < f[`WZP-${bgName}`]) {
+              bg.winningPoints = f[`WZP-${bgName}`]
+              bg.winner = f.Name
+              bg.color = `color: ${f.TeamColor}`
+            }
           })
         })
 
