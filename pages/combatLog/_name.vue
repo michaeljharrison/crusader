@@ -359,7 +359,7 @@ export default {
             })
             this.$message.success(`Battle Report Updated.`)
             setTimeout(() => {
-              window.location.href = this.name || 'combatLog'
+              window.location.href = 'combatLog'
             }, 0)
           } catch (e) {
             console.error(e)
