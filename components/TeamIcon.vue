@@ -10,7 +10,8 @@
     <Chaos
       v-if="
         team === CONSTANTS.TEAMS.HEARDSOFTHEWRITHINGNIGHT ||
-        team === CONSTANTS.TEAMS.CHAOS
+        team === CONSTANTS.TEAMS.CHAOS ||
+        team === CONSTANTS.TEAMS.NURGLEUPRISING
       "
     />
     <DarkAngels v-if="team === CONSTANTS.TEAMS.DARKANGELS" />
@@ -18,13 +19,18 @@
     <Eldar
       v-if="
         team === CONSTANTS.TEAMS.THEUNKNOWNCRAFTWORLD ||
-        team === CONSTANTS.TEAMS.THEUNKNOWNCRAFTWORLD
+        team === CONSTANTS.TEAMS.THECORONASELDAR
       "
     />
     <GenestealerCults
       v-if="team === CONSTANTS.TEAMS.CULTOFTHELIGHTNINGEATERS"
     />
-    <MortariansAnvil v-if="team === CONSTANTS.TEAMS.DEATHGUARD" />
+    <MortariansAnvil
+      v-if="
+        team === CONSTANTS.TEAMS.DEATHGUARD ||
+        team === CONSTANTS.TEAMS.MORTARIANSANVIL
+      "
+    />
     <Necron
       v-if="
         team === CONSTANTS.TEAMS.NECRON ||

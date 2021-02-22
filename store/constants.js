@@ -11,6 +11,7 @@ export default {
     BLOODANGELS: 'blood-angels',
     CULTOFTHELIGHTNINGEATERS: 'cult-of-the-lightning-eaters',
     DEATHGUARD: 'death-guard',
+    DEATHGUARD: 'mortarians-anvil',
     HEARDSOFTHEWRITHINGNIGHT: 'heralds-of-the-writhing-night',
     NARTEKHDYNASTY: 'nartekh-dynasty',
     NURGLEUPRISING: 'nurgle-uprising',

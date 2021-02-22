@@ -12,6 +12,15 @@ $border-radius-base: 4px; // major border radius
 $border-color-base: #d9d9d9; // major border color
 $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
 
+// Global
+.container {
+  background-image: radial-gradient(
+    circle farthest-corner at 50% 100%,
+    #00291e,
+    #001b14 21%,
+    #000
+  );
+}
 // Flex
 .column {
   display: flex;
@@ -174,6 +183,9 @@ h6 {
 }
 
 .ant-form-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin-bottom: 0px !important;
 
   .field-label {

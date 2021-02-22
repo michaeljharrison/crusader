@@ -330,7 +330,6 @@ html.w-mod-touch * {
 
 .w-button {
   display: inline-block;
-  padding: 9px 15px;
   background-color: #3898ec;
   color: white;
   border: 0;
@@ -3287,13 +3286,6 @@ textarea.w-select {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background-color: #000;
-  background-image: radial-gradient(
-    circle farthest-corner at 50% 100%,
-    #00291e,
-    #001b14 21%,
-    #000
-  );
 }
 
 .h7 {
