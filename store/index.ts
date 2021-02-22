@@ -32,8 +32,9 @@ export const actions = {
     try {
       // Create Battle Report.
       await collectionRef.add({
-        createdOn: new Date(),
+        'Created On': new Date(Date.now()).toDateString(),
         ...report,
+        disabled: true
       })
 
       // Get both player objects.

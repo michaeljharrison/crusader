@@ -1,19 +1,12 @@
 <template>
   <div class="container">
     <div class="bigcontainer">
-      <h1 class="h2">Leaderboard</h1>
-      <a-table :columns="columnsLeaderboard" :data-source="data">
-        <div class="row center" slot="Name" slot-scope="Name, record">
-          <TeamIcon :teamSlug="record.Slug"></TeamIcon>
-          <p :style="record.TeamColor">{{ Name }}</p>
-        </div>
-      </a-table>
       <h1 class="h2">BattleLog</h1>
       <a-table :columns="columnsBattleLog" :data-source="brData">
         <NuxtLink
           slot="Name"
           slot-scope="Name, record"
-          :to="'/combatLog/' + record.Slug"
+          :to="'/adminLog/' + record.Slug"
           >{{ Name || 'UNAMED BATTLE' }}</NuxtLink
         >
         <span slot="Date" slot-scope="Date, record">{{
@@ -220,7 +213,7 @@ export default {
             console.log(new Date(Date.parse(br['Created On'])))
             br['Created On'] = new Date(Date.parse(br['Created On']))
           }
-          if (!br.Disabled) vm.brData.push(br)
+          if (br.Disabled) vm.brData.push(br)
         })
       } catch (e) {
         alert(e)

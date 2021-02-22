@@ -53,7 +53,8 @@ export interface BattleReport {
 'Battle Report Big': string
 'Battleground':string
 'Collection ID':string
-'Created On':string
+'Created On': any
+Disabled: boolean
 Date:string
 Draw: boolean
 'Item ID':string

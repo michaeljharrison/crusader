@@ -13,7 +13,12 @@ $border-color-base: #d9d9d9; // major border color
 $box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // major shadow for layers
 
 // Global
+html {
+  overflow-x: hidden;
+}
+
 .container {
+  overflow-x: scroll;
   background-image: radial-gradient(
     circle farthest-corner at 50% 100%,
     #00291e,
