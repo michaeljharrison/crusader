@@ -21,6 +21,7 @@ export default {
     THEOMNISSIAHSEXPLORATOR: 'the-omnissiahs-explorator',
     MECHANICUS: 'mechanicus',
     THEUNKNOWNCRAFTWORLD: 'the-unknown-craftworld',
+    THECORONASELDAR: 'the-coronas-eldar',
     DARKANGELS: 'dark-angels',
     CHAOS: 'chaos',
     NECRON: 'necron',

@@ -11,7 +11,7 @@
       <a-radio-button value="true"> Edit </a-radio-button>
     </a-radio-group>
     <div class="line"></div>
-    <div v-if="edit === 'false'" class="div-block-20">
+    <div v-if="!edit" class="div-block-20">
       <div>
         <div>
           <h1 class="h2">Winner:&nbsp;</h1>
@@ -53,7 +53,248 @@
         />
       </div>
     </div>
-    <div v-else class="div-block-20">NOT YET IMPLEMENTED!</div>
+    <div class="div-block-20" v-show="edit">
+      <div class="w-form">
+        <a-form
+          id="wf-form-Battle-Report"
+          name="wf-form-Battle-Report"
+          data-name="Battle Report"
+          _lpchecked="1"
+          :form="form"
+          :label-col="{ span: 5 }"
+          :wrapper-col="{ span: 12 }"
+          @submit="handleSubmit"
+        >
+          <a-form-item>
+            <label for="Name" class="field-label">Name</label>
+            <a-input
+              id="Name"
+              v-decorator="[
+                'Name',
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please name this battle report.',
+                    },
+                  ],
+                },
+              ]"
+              placeholder="The battle of..."
+              maxlength="5000"
+              name="Name"
+              data-name="Name"
+              class="textarea w-input"
+            >
+            </a-input>
+          </a-form-item>
+          <a-form-item>
+            <label for="Player" class="field-label">Player 1 Team</label>
+            <a-select
+              v-decorator="[
+                'Team 1',
+                {
+                  rules: [
+                    { required: true, message: 'Please select first player' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Player 1 Team..."
+              @change="selectPlayer1"
+            >
+              <a-select-option
+                v-for="(item, key) in factions"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Player" class="field-label">Player 2 Team</label
+            ><a-select
+              v-decorator="[
+                'Team 2',
+                {
+                  rules: [
+                    { required: true, message: 'Please select second player' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Player 2 Team..."
+              @change="selectPlayer2"
+            >
+              <a-select-option
+                v-for="(item, key) in factions"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Game-Type" class="field-label">Game Type</label>
+            <a-select
+              v-decorator="[
+                'Mission',
+                {
+                  rules: [
+                    { required: true, message: 'Please select a game type.' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Sweep and Clear, the Relic etc..."
+              @change="selectMission"
+            >
+              <a-select-option
+                v-for="(item, key) in missions"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Power-Level" class="field-label"
+              >Power Level/Points</label
+            ><a-select
+              v-decorator="[
+                'Power Level',
+                {
+                  rules: [
+                    { required: true, message: 'Please select power level!' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="25, 35 etc..."
+              @change="selectPL"
+            >
+              <a-select-option :key="25" :value="25"> 25 </a-select-option>
+              <a-select-option :key="35" :value="35"> 35 </a-select-option>
+              <a-select-option :key="50" :value="50"> 50 </a-select-option>
+              <a-select-option :key="100" :value="100"> 100 </a-select-option>
+            </a-select></a-form-item
+          >
+          <a-form-item>
+            <label for="Planet" class="field-label">Planet</label>
+            <p class="hint">
+              (If you forgot to pick one before the battle, agree on a planet
+              with your opponent, or roll randomly)
+            </p>
+            <a-select
+              v-decorator="[
+                'Battleground',
+                {
+                  rules: [{ required: true, message: 'Please select planet!' }],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Doridia, Kjelstan etc..."
+              @change="selectBattleground"
+            >
+              <a-select-option
+                disabled
+                v-for="(item, key) in battlegrounds"
+                :key="key"
+                :value="item"
+              >
+                {{ item }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Player-3" class="field-label">Winning Team</label>
+            <p class="hint">(In the case of a draw, just write 'Draw')</p>
+            <a-select
+              disabled
+              v-decorator="[
+                'Winning Team',
+                {
+                  rules: [
+                    { required: true, message: 'Please select a winner!' },
+                  ],
+                },
+              ]"
+              style="width: 120px"
+              placeholder="Winning team..."
+              @change="selectWinner"
+            >
+              <a-select-option :key="selectedPlayer1" :value="selectedPlayer1">
+                {{ selectedPlayer1 }}
+              </a-select-option>
+              <a-select-option :key="selectedPlayer2" :value="selectedPlayer2">
+                {{ selectedPlayer2 }}
+              </a-select-option>
+            </a-select>
+          </a-form-item>
+          <a-form-item>
+            <label for="Battle-Report" class="field-label">Battle Report</label
+            ><a-input
+              id="Battle-Report"
+              v-decorator="[
+                'Battle Report',
+                {
+                  rules: [],
+                },
+              ]"
+              placeholder="Write any interesting or relevant details about the battle. The more the merrier."
+              maxlength="5000"
+              name="Battle-Report"
+              data-name="Battle Report"
+              class="textarea w-input"
+            ></a-input>
+          </a-form-item>
+          <a-form-item>
+            <label for="Marked-for-Greatness" class="field-label"
+              >Marked for Greatness</label
+            ><a-input
+              id="Marked-for-Greatness"
+              v-decorator="[
+                'Marked for Greatness',
+                {
+                  rules: [
+                    {
+                      required: true,
+                      message:
+                        'Please input both players marked for greatness options.',
+                    },
+                  ],
+                },
+              ]"
+              placeholder='Record here the Marked for Greatness units for both armies (eg. "John the Primaris Captain and Bill the Necron Plasmacyte")'
+              maxlength="5000"
+              name="Marked-for-Greatness"
+              data-name="Marked for Greatness"
+              class="textarea w-input"
+            ></a-input>
+          </a-form-item>
+          <a-form-item>
+            <a-button
+              type="primary"
+              html-type="submit"
+              value="Submit"
+              data-wait="Please wait..."
+              class="w-button"
+            >
+              Submit
+            </a-button>
+          </a-form-item>
+        </a-form>
+        <div class="w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -69,10 +310,28 @@ export default {
   data() {
     const name: String = this.name
     const br: BattleReport | null = null
+    const battlegrounds: any[] = []
+    const factions: any[] = []
+    const missions: any[] = []
+    const pl: number = 25
     return {
       name,
       br,
-      edit: 'false',
+      edit: false,
+      loading: false,
+      error: null,
+      post: null,
+      pl: 25,
+      battlegrounds,
+      factions,
+      missions,
+      winner: '',
+      selectedBattleground: '',
+      selectedMission: '',
+      selectedPlayer1: '',
+      selectedPlayer2: '',
+      formLayout: 'horizontal',
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     }
   },
   watch: {
@@ -84,9 +343,59 @@ export default {
     // already being observed
     this.fetchData()
   },
+  mounted() {},
   methods: {
+    handleSubmit(e: Event) {
+      e.preventDefault()
+      this.form.validateFields(async (err: any, values: any) => {
+        if (!err) {
+          values.Slug = this.name
+          console.log(values)
+          this.$message.loading(`Updating battle report...`)
+          try {
+            await this.$store.dispatch('ACTION_updateBattleReport', {
+              fire: this.$fire,
+              report: values,
+            })
+            this.$message.success(`Battle Report Updated.`)
+            setTimeout(() => {
+              window.location.reload()
+            }, 0)
+          } catch (e) {
+            console.error(e)
+            this.$message.error(
+              `Warp storms have caused your updates to be lost!`
+            )
+            this.$store.commit('SET_isLoading', false)
+          } finally {
+            // Cleanup
+          }
+        }
+      })
+    },
+    selectBattleground(planet: string) {
+      this.selectedBattleground = planet
+    },
+    selectPlayer1(player1: string) {
+      this.selectedPlayer1 = player1
+    },
+    selectPlayer2(player2: string) {
+      this.selectedPlayer2 = player2
+    },
+    selectPL(pl: number) {
+      this.pl = pl
+    },
+    selectWinner(winner: string) {
+      this.winner = winner
+    },
+    selectMission(mission: string) {
+      this.mission = mission
+    },
     handleEditchange(e) {
       this.edit = e.target.value
+      this.form.setFieldsValue({
+        ...this.br,
+      })
     },
     async fetchData() {
       this.error = this.post = null
@@ -96,6 +405,7 @@ export default {
       const brRef = this.$fire.firestore.collection(
         constants.COLLECTIONS.BATTLEREPORTS
       )
+
       const vm = this
       try {
         console.log(this.name)
@@ -107,7 +417,65 @@ export default {
         const snapshot = await ref.get()
         const data = await snapshot.data()
         console.log(data)
+        console.log(vm.form)
+        vm.form.setFieldsValue({
+          ...vm.br,
+        })
         vm.br = data
+
+        const missionsRef = this.$fire.firestore.collection(
+          constants.COLLECTIONS.MISSIONS
+        )
+        try {
+          const snapshot = await missionsRef.get()
+          const docs = snapshot.docs
+          if (!docs) {
+            alert('Document does not exist.')
+            return
+          }
+          vm.missions = []
+          docs.forEach((mission: any) => {
+            vm.missions.push(mission.data().name)
+          })
+        } catch (e) {
+          alert(e)
+        }
+
+        const bgRef = this.$fire.firestore.collection(
+          constants.COLLECTIONS.BATTLEGROUNDS
+        )
+        try {
+          const snapshot = await bgRef.get()
+          const docs = snapshot.docs
+          if (!docs) {
+            alert('Document does not exist.')
+            return
+          }
+          vm.battlegrounds = []
+          docs.forEach((battleground: any) => {
+            vm.battlegrounds.push(battleground.data().name)
+          })
+        } catch (e) {
+          alert(e)
+        }
+
+        const factionsRef = this.$fire.firestore.collection(
+          constants.COLLECTIONS.TEAMS
+        )
+        try {
+          const snapshot = await factionsRef.get()
+          const docs = snapshot.docs
+          if (!docs) {
+            alert('Document does not exist.')
+            return
+          }
+          vm.factions = []
+          docs.forEach((faction: any) => {
+            vm.factions.push(faction.data().Name)
+          })
+        } catch (e) {
+          alert(e)
+        }
       } catch (e) {
         alert(e)
       }

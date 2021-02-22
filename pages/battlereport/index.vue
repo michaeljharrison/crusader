@@ -281,6 +281,9 @@ export default {
               report: values,
             })
             this.$message.success(`Battle Report Submitted.`)
+            // setTimeout(() => {
+            //   window.location.href = 'combatLog'
+            // }, 0)
           } catch (e) {
             console.error(e)
             this.$message.error(

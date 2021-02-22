@@ -1,31 +1,32 @@
 <template>
-<a-timeline-item class="battleReport">
-  <div class="header">
-    <div class="left">
-        <h6>{{br.Name}}</h6>
-        <p>{{br.Date}}</p>
+  <a-timeline-item class="battleReport">
+    <div class="header">
+      <div class="left">
+        <h6>{{ br.Name }}</h6>
+        <p>{{ br.createdOn && br.createdOn.toDate() }}</p>
       </div>
-      <div class=right>
-        <TeamIcon :teamSlug="br['Team 1']"/>
-        <TeamIcon :teamSlug="br['Team 2']"/>
+      <div class="right">
+        <TeamIcon :teamSlug="br['Team 1']" />
+        <TeamIcon :teamSlug="br['Team 2']" />
       </div>
-  </div>
-  
-  <p v-html="br['Battle Report']"></p></a-timeline-item>
+    </div>
+
+    <p v-html="br['Battle Report']"></p
+  ></a-timeline-item>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import TeamIcon from '~/components/TeamIcon.vue';
-import {BattleReport} from'~/store/types'
+import TeamIcon from '~/components/TeamIcon.vue'
+import { BattleReport } from '~/store/types'
 import constants from '~/store/constants'
 
 export default Vue.extend({
   transition: 'page',
   props: ['fragment'],
   data() {
-    const br: BattleReport = this.fragment;
+    const br: BattleReport = this.fragment
     return {
       loading: false,
       br,
@@ -42,13 +43,11 @@ export default Vue.extend({
   created() {
     // fetch the data when the view is created and the data is
     // already being observed
-    // this.fetchData() 
+    // this.fetchData()
   },
   mounted() {
-     // this.fetchImages()
+    // this.fetchImages()
   },
-  methods: {
-  },
+  methods: {},
 })
 </script>
-  
