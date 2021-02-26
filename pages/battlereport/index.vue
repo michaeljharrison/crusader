@@ -167,6 +167,7 @@
               >
                 {{ selectedPlayer2.Name }}
               </a-select-option>
+              <a-select-option key="draw" value="draw"> Draw </a-select-option>
             </a-select>
           </a-form-item>
           <a-form-item>
@@ -289,7 +290,7 @@ export default {
             })
             this.$message.success(`Battle Report Submitted.`)
             setTimeout(() => {
-              window.location.href = 'combatLog'
+              // window.location.href = 'combatLog'
             }, 0)
           } catch (e) {
             console.error(e)

@@ -12,8 +12,8 @@ export interface Faction {
 }
 
 export interface Team {
-'Battles Played': number 
-'Battles Won': number
+'Battles Played': string 
+'Battles Won': string
 winRate: string
 'Collection ID': string
 'Created On': string

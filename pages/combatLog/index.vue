@@ -3,7 +3,7 @@
     <div class="bigcontainer">
       <h1 class="h2">Leaderboard</h1>
       <a-table :columns="columnsLeaderboard" :data-source="data">
-        <div class="row center" slot="Name" slot-scope="Name, record">
+        <div class="column center" slot="Name" slot-scope="Name, record">
           <TeamIcon :teamSlug="record.Slug"></TeamIcon>
           <p :style="record.TeamColor">{{ Name }}</p>
         </div>

@@ -31,8 +31,9 @@ export const actions = {
     )
     try {
       // Create Battle Report.
+      const now = new Date(Date.now());
       await collectionRef.add({
-        'Created On': new Date(Date.now()).toDateString(),
+        'Created On': `${now.toDateString()} ${now.getHours()}:${now.getMinutes()}`,
         ...report,
         Disabled: true
       })
@@ -49,49 +50,39 @@ export const actions = {
       let winnerData: Team
       let bgSlug: string = await getBattleGround(report.Battleground);
       let dataField: string = `WZP-${bgSlug}`
-      console.log(dataField);
+      const wzpValue1 = parseInt(p1[dataField]) || 0;
+        const wzpValue2 = parseInt(p2[dataField]) || 0;
+
       if (report['Winning Team'] === report['Team 1']) {
         // PLAYER 1 WINS
         winnerRef = player1Ref
         winnerData = p1
-        if (p1[dataField] >= 0) {
-          p1[dataField] += 3
-        } else {
-          p1[dataField] = 3
-        }
-        if (p2[dataField] >= 0) {
-          p2[dataField] += 1
-        } else {
-          p2[dataField] = 1
-        }
-      } else {
+        p1[dataField] = wzpValue1 + 3
+        p2[dataField] = wzpValue2 + 1
+      } else if (report['Winning Team'] === report['Team 2']){
         // PLAYER 2 WINS
         winnerRef = player2Ref
         winnerData = p2
-        if (p1[dataField] >= 0) {
-          p1[dataField] += 1
-        } else {
-          p1[dataField] = 1
-        }
-        if (p2[dataField] >= 0) {
-          p2[dataField] += 3
-        } else {
-          p2[dataField] = 3
-        }
+        p1[dataField] = wzpValue1 + 1
+        p2[dataField] = wzpValue2 + 3
+      } else {
+        p1[dataField] = wzpValue1 + 1
+        p2[dataField] = wzpValue2 + 1
       }
 
       // Update Player 1.
       const update1: Object = {
-        played: (p1['Battles Played'] && p1['Battles Played'] + 1) || 1,
+        'Battles Played': (parseInt(p1['Battles Played']) && parseInt(p1['Battles Played']) + 1) || 1,
       }
       update1[dataField] = p1[dataField];
+      console.log(update1);
       await player1Ref.update({
         ...update1
       })
 
       // Update Player 2
       const update2: Object = {
-        played: (p2['Battles Played'] && p2['Battles Played'] + 1) || 1,
+        played: (parseInt(p2['Battles Played']) && parseInt(p2['Battles Played']) + 1) || 1,
       }
       update2[dataField] = p2[dataField];
 
@@ -99,14 +90,18 @@ export const actions = {
        ...update2
       })
 
-      // Update Winner.
+      
+
+      if(report['Winning Team'] === "draw") {
+
+      } else {
+        // Update Winner.
       await winnerRef.update({
-        won: (winnerData && winnerData['Battles Won'] + 1) || 1,
+        won: (winnerData && parseInt(winnerData['Battles Won']) + 1) || 1,
       })
-      console.log('FIN!');
+      }
     } catch (e) {
-      console.log(e);
-      alert(e)
+      console.error(e);
       return
     }
     commit('SET_isLoading', false)
