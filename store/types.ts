@@ -40,7 +40,6 @@ TeamColor: string
 'WZP-TelemonPrime': string
 'Win Ratio': string
 }
-
 export interface Battleground {
   description: string
   name: string
@@ -78,4 +77,67 @@ export interface LoreFragment {
   Name: string,
   'Related Team': string,
   Slug: string
+}
+
+export interface Crusade {
+  Name: string,
+  Faction: string,
+  Battles: number,
+  Won: number,
+  Supply: number,
+  SupplyUsed: number,
+  Requisition: number,
+  RequisitionUsed: number,
+  OrderOfBottle: Array<Unit>
+}
+
+export interface Unit {
+  Name: string,
+  Type: string,
+  Division: Division,
+  Fluff: string,
+  Power: number,
+  Points: number,
+  IsWarlord: boolean,
+  Battles: number,
+  Survived: number,
+  MarkedForGreatness: number
+  XP: number,
+  KillsMelee: number,
+  KillsRanged: number,
+  KillsPsychic: number,
+  Relic: Relic,
+  Trait: Trait,
+  Honours: Array<Honour>,
+  Scars: Array<Scars>,
+  Notes: string,
+}
+
+export interface Relic {
+  Name: string,
+  Description: string
+}
+
+export interface Trait {
+  Name: string,
+  Description: string,
+}
+
+export interface Honour {
+  Name: string,
+  Description: string
+}
+
+export interface Scars {
+  Name: string,
+  Description: string
+}
+
+enum Division {
+  HQ,
+  Troop,
+  Elite,
+  FastAttack,
+  HeavySupport,
+  Transport
 }

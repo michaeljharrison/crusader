@@ -6,6 +6,7 @@ export default {
     LORE: 'lore',
     BATTLEREPORTS: 'battlereports',
     MISSIONS: 'missions',
+    CRUSADES: 'crusades',
   },
   TEAMS: {
     BLOODANGELS: 'blood-angels',
