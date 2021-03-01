@@ -21,7 +21,6 @@ export const actions = {
   ) {
     commit('SET_isLoading', true) // Start proving (lock UI)
     // Do some stuff
-    console.log(options)
     const { report, fire } = options
     const collectionRef = fire.firestore.collection(
       constants.COLLECTIONS.BATTLEREPORTS
@@ -75,7 +74,6 @@ export const actions = {
         'Battles Played': (parseInt(p1['Battles Played']) && parseInt(p1['Battles Played']) + 1) || 1,
       }
       update1[dataField] = p1[dataField];
-      console.log(update1);
       await player1Ref.update({
         ...update1
       })
@@ -112,7 +110,6 @@ export const actions = {
   ) {
     commit('SET_isLoading', true) // Start proving (lock UI)
     // Do some stuff
-    console.log(options)
     const { report, fire } = options
     const reportsRef = fire.firestore.collection(
       constants.COLLECTIONS.BATTLEREPORTS
@@ -123,7 +120,6 @@ export const actions = {
     try {
       // Get Battle Report.
       const brRef: any = await getBattleReport(report, reportsRef);
-      console.log(brRef);
       await brRef.update({
         ...report
       })
@@ -157,7 +153,6 @@ export const actions = {
 }
 
 const getFaction: any = async (name: string, collectionRef: any) => {
-  console.log(`Finding faction ${name}`);
   let ref: any = await collectionRef.doc(name)
   let doc: any = await ref.get();
   if (!doc.exists) {
@@ -186,7 +181,6 @@ const getBattleReport: any = async ( report: BattleReport, collectionRef: any ) 
 export const getBattleGround: any = async ( bg: String,) => {
   bg = bg.replace(/'/, '');
   const bgArray: string[] = bg.split(' ');
-  console.log(bgArray);
   for (var i = 0; i < bgArray.length; i++) { 
     bgArray[i] = bgArray[i].charAt(0).toUpperCase() + bgArray[i].substring(1);
   }

@@ -1,4 +1,20 @@
+import axios from 'axios'
 export default {
+  generate: {
+    crawler: true,
+    routes() {
+      return axios
+        .get(
+          'https://firestore.googleapis.com/v1/projects/crusader-3cc51/databases/(default)/documents/battlereports'
+        )
+        .then((res) => {
+          return res.data.documents.map((br) => {
+            const arr = br.name.split('/')
+            return '/combatLog/' + arr[arr.length - 1]
+          })
+        })
+    },
+  },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
