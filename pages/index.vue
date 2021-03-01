@@ -56,20 +56,24 @@
         <div class="line"></div>
         <div class="stack">
           <div class="half">
-            <h2 class="h2">
-              Transmissions & Recordings
-            </h2>
+            <h2 class="h2">Transmissions & Recordings</h2>
             <a-timeline>
-          <LoreFragment v-for="(item, key) in loreFragments" :key="key" :fragment="item" ></LoreFragment>
-        </a-timeline>
+              <LoreFragment
+                v-for="(item, key) in loreFragments"
+                :key="key"
+                :fragment="item"
+              ></LoreFragment>
+            </a-timeline>
           </div>
           <div class="half 2">
-            <h2 class="h2">
-              Combat Reports
-            </h2>
+            <h2 class="h2">Combat Reports</h2>
             <a-timeline>
-          <BattleReport v-for="(item, key) in battleReports" :key="key" :fragment="item" ></BattleReport>
-        </a-timeline>3
+              <BattleReport
+                v-for="(item, key) in battleReports"
+                :key="key"
+                :fragment="item"
+              ></BattleReport> </a-timeline
+            >3
           </div>
         </div>
       </div>
@@ -81,8 +85,8 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import constants from '~/store/constants'
-import LoreFragment from '~/components/LoreFragment.vue';
-import { BattleReport, LoreFragment as Lore } from '~/store/types';
+import LoreFragment from '~/components/LoreFragment.vue'
+import { BattleReport, LoreFragment as Lore } from '~/store/types'
 
 export default Vue.extend({
   transition: 'page',
@@ -99,7 +103,7 @@ export default Vue.extend({
       battleReports,
     }
   },
-  components: {LoreFragment},
+  components: { LoreFragment },
   watch: {
     // call again the method if the route changes
     $route: 'fetchData',
@@ -120,11 +124,9 @@ export default Vue.extend({
       const vm = this
       const storageRef = this.$fire.storage.ref('home/carousel')
       const imgList = await storageRef.listAll()
-      console.log(imgList)
       imgList.items.forEach(async (imgRef) => {
         try {
           const url = await imgRef.getDownloadURL()
-          console.log(`The file can be found here: ${url}`)
           vm.images.push(url)
         } catch (e) {
           alert(e.message)
@@ -145,9 +147,9 @@ export default Vue.extend({
       const vm = this
       try {
         const snapshot = await loreRef.get()
-        const brSnapshot = await battleReportsRef.get();
+        const brSnapshot = await battleReportsRef.get()
         const docs = snapshot.docs
-        const brDocs = brSnapshot.docs;
+        const brDocs = brSnapshot.docs
         if (!docs) {
           alert('Document does not exist.')
           return

@@ -1,14 +1,30 @@
 <template>
-  <div class="bigcontainer">
+  <div class="container">
     <h1 class="h1">{{ br && br.Name }}</h1>
+    <div class="likeButton">
+      <a-button
+        theme="outlined"
+        type="primary"
+        shape="circle"
+        icon="heart"
+        @click="
+          () => {
+            likeReport(record)
+          }
+        "
+      />
+      <p class="paragraph" style="text-align: center">
+        Liked {{ likes }} times
+      </p>
+    </div>
     <div class="div-block-16">
       <h1 class="h2">{{ br && br['Team 1'].replaceAll('-', ' ') }}</h1>
       <h1 class="h2 vs">vs</h1>
       <h1 class="h2">{{ br && br['Team 2'].replaceAll('-', ' ') }}</h1>
     </div>
     <a-radio-group :value="edit" @change="handleEditchange">
-      <a-radio-button value="false"> View </a-radio-button>
-      <a-radio-button value="true"> Edit </a-radio-button>
+      <a-radio-button :value="false"> View </a-radio-button>
+      <a-radio-button :value="true"> Edit </a-radio-button>
     </a-radio-group>
     <div class="line"></div>
     <div v-if="!edit" class="div-block-20">
@@ -307,6 +323,7 @@ export default {
     const name = params.name
     return { name }
   },
+  components: {},
   data() {
     const name: String = this.name
     const br: BattleReport | null = null
@@ -317,6 +334,8 @@ export default {
     return {
       name,
       br,
+      liked: false,
+      likes: 0,
       edit: false,
       loading: false,
       error: null,
@@ -345,12 +364,27 @@ export default {
   },
   mounted() {},
   methods: {
+    async likeReport() {
+      try {
+        await this.$store.dispatch('ACTION_likeBattleReport', {
+          fire: this.$fire,
+          newLikes: this.likes + 1,
+          report: this.br,
+        })
+        this.$message.success(`Battle report liked!`)
+        this.likes += 1
+        this.liked = true
+      } catch (e) {
+        console.error(e)
+        this.$message.error(`Warp storms have caused your updates to be lost!`)
+        this.$store.commit('SET_isLoading', false)
+      }
+    },
     handleSubmit(e: Event) {
       e.preventDefault()
       this.form.validateFields(async (err: any, values: any) => {
         if (!err) {
           values.Slug = this.name
-          console.log(values)
           this.$message.loading(`Updating battle report...`)
           try {
             await this.$store.dispatch('ACTION_updateBattleReport', {
@@ -393,9 +427,11 @@ export default {
     },
     handleEditchange(e) {
       this.edit = e.target.value
-      this.form.setFieldsValue({
-        ...this.br,
-      })
+      if (e.target.value == true) {
+        this.form.setFieldsValue({
+          ...this.br,
+        })
+      }
     },
     async fetchData() {
       this.error = this.post = null
@@ -408,7 +444,6 @@ export default {
 
       const vm = this
       try {
-        console.log(this.name)
         const ref = await brRef.doc(`${this.name}`)
         if (!ref) {
           alert('Document does not exist.')
@@ -416,12 +451,11 @@ export default {
         }
         const snapshot = await ref.get()
         const data = await snapshot.data()
-        console.log(data)
-        console.log(vm.form)
         vm.form.setFieldsValue({
           ...vm.br,
         })
         vm.br = data
+        vm.likes = (data && data.Likes) || 0
 
         const missionsRef = this.$fire.firestore.collection(
           constants.COLLECTIONS.MISSIONS
@@ -486,3 +520,11 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.likeButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

@@ -281,7 +281,6 @@ export default {
       e.preventDefault()
       this.form.validateFields(async (err: any, values: any) => {
         if (!err) {
-          console.log(values)
           this.$message.loading(`Submitting battle report...`)
           try {
             await this.$store.dispatch('ACTION_submitBattleReport', {

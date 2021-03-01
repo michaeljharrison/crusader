@@ -208,9 +208,7 @@ export default {
             br['Name'] = battleReport.id
             br['Slug'] = battleReport.id
           }
-          console.log(br)
           if (br['Created On']) {
-            console.log(new Date(Date.parse(br['Created On'])))
             br['Created On'] = new Date(Date.parse(br['Created On']))
           }
           if (br.Disabled) vm.brData.push(br)

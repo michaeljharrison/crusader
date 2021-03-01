@@ -51,7 +51,6 @@ export default Vue.extend({
   },
   methods: {
     async fetchData() {
-      console.log(this.lore)
       this.error = this.post = null
       this.loading = true
       const fetchedId = this.$route.params.id
@@ -69,7 +68,6 @@ export default Vue.extend({
         }
         const teamSnapshot = await teamRef.get()
         const teamData: Team = await teamSnapshot.data()
-        console.log(teamData)
         vm.teamColor = `background-color: ${
           (teamData && teamData.TeamColor) || 'blue'
         }`

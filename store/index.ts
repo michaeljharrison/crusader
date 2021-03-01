@@ -121,7 +121,7 @@ export const actions = {
       constants.COLLECTIONS.TEAMS
     )
     try {
-      // Create Battle Report.
+      // Get Battle Report.
       const brRef: any = await getBattleReport(report, reportsRef);
       console.log(brRef);
       await brRef.update({
@@ -129,6 +129,26 @@ export const actions = {
       })
     } catch (e) {
       console.log(e);
+      alert(e)
+      return
+    }
+    commit('SET_isLoading', false)
+  },
+  async ACTION_likeBattleReport(
+    { commit }: any,
+    options: { report: BattleReport; newLikes: number, fire: any }
+  ) {
+    commit('SET_isLoading', true) // Start proving (lock UI)
+    const { report, fire , newLikes} = options
+    const reportsRef = fire.firestore.collection(
+      constants.COLLECTIONS.BATTLEREPORTS
+    )
+    try {
+      const brRef: any = await getBattleReport(report, reportsRef);
+      await brRef.update({
+        Likes: newLikes
+      })
+    } catch (e) {
       alert(e)
       return
     }

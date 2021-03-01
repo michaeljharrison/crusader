@@ -359,8 +359,6 @@ export default {
       this.form.validateFields(async (err: any, values: any) => {
         if (!err) {
           values.Slug = this.name
-          console.log('Setting BR Values...')
-          console.log(values)
           this.$message.loading(`Updating battle report...`)
           try {
             await this.$store.dispatch('ACTION_updateBattleReport', {
@@ -400,8 +398,6 @@ export default {
     },
     handleEditchange(e) {
       this.edit = e.target.value
-      console.log(this.br.Disabled)
-      console.log(this.form)
       this.form.setFieldsValue({
         ...this.br,
       })
@@ -417,7 +413,6 @@ export default {
 
       const vm = this
       try {
-        console.log(this.name)
         const ref = await brRef.doc(`${this.name}`)
         if (!ref) {
           alert('Document does not exist.')
@@ -425,8 +420,6 @@ export default {
         }
         const snapshot = await ref.get()
         const data = await snapshot.data()
-        console.log(data)
-        console.log(vm.form)
         vm.form.setFieldsValue({
           ...vm.br,
         })

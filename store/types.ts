@@ -60,6 +60,7 @@ Draw: boolean
 'Marked for Greatness':string
 Mission:string
 Name:string
+Likes: number
 Photos:string
 'Power Level':number
 'Published On':string

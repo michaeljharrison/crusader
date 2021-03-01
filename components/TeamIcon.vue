@@ -1,5 +1,5 @@
 <template>
-  <div class="TeamIcon">
+  <div class="teamIcon">
     <AdMech
       v-if="
         team === CONSTANTS.TEAMS.THEOMNISSIAHSEXPLORATOR ||

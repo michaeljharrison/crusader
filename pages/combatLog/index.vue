@@ -2,14 +2,22 @@
   <div class="container">
     <div class="bigcontainer">
       <h1 class="h2">Leaderboard</h1>
-      <a-table :columns="columnsLeaderboard" :data-source="data">
+      <a-table
+        :columns="columnsLeaderboard"
+        :data-source="data"
+        :loading="loadingData"
+      >
         <div class="column center" slot="Name" slot-scope="Name, record">
           <TeamIcon :teamSlug="record.Slug"></TeamIcon>
           <p :style="record.TeamColor">{{ Name }}</p>
         </div>
       </a-table>
       <h1 class="h2">BattleLog</h1>
-      <a-table :columns="columnsBattleLog" :data-source="brData">
+      <a-table
+        :columns="columnsBattleLog"
+        :data-source="brData"
+        :loading="loadingBRData"
+      >
         <NuxtLink
           slot="Name"
           slot-scope="Name, record"
@@ -78,6 +86,10 @@ const columnsBattleLog = [
     sorter: (a: BattleReport, b: BattleReport) => a.Name > b.Name,
   },
   {
+    key: 'Like',
+    scopedSlots: { customRender: 'Like' },
+  },
+  {
     title: 'Date',
     key: 'Created On',
     dataIndex: 'Created On',
@@ -137,6 +149,8 @@ const brData: BattleReport[] = []
 export default {
   data() {
     return {
+      loadingData: true,
+      loadingBRData: true,
       data,
       brData,
       columnsLeaderboard,
@@ -160,6 +174,17 @@ export default {
     this.fetchCombatLog()
   },
   methods: {
+    async likeReport(report) {
+      this.$message.success(`Like submitted!`)
+      const newBRData = this.brData
+      const brIndex = newBRData.findIndex((row) => row.Slug == report.Slug)
+      if (newBRData[brIndex].Likes) {
+        newBRData[brIndex].Likes += 1
+      } else {
+        newBRData[brIndex].Likes = 1
+      }
+      this.brData = newBRData
+    },
     async fetchData() {
       this.error = this.post = null
       this.loading = true
@@ -185,6 +210,7 @@ export default {
           t.TeamColor = `color: ${t.TeamColor}`
           vm.data.push(t)
         })
+        vm.loadingData = false
       } catch (e) {
         alert(e)
       }
@@ -215,13 +241,14 @@ export default {
             br['Name'] = battleReport.id
             br['Slug'] = battleReport.id
           }
-          console.log(br)
           if (br['Created On']) {
-            console.log(new Date(Date.parse(br['Created On'])))
-            br['Created On'] = new Date(Date.parse(br['Created On']))
+            br['Created On'] = new Date(
+              Date.parse(br['Created On'])
+            ).toDateString()
           }
           if (!br.Disabled) vm.brData.push(br)
         })
+        vm.loadingBRData = false
       } catch (e) {
         alert(e)
       }
