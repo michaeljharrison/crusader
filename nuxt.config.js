@@ -1,4 +1,6 @@
 import axios from 'axios'
+import webpack from 'webpack'
+
 export default {
   generate: {
     crawler: true,
@@ -37,6 +39,7 @@ export default {
     '@/assets/style/base.scss',
     '@/assets/style/main.scss',
     '@/assets/style/font.scss',
+    '@/assets/style/type.scss',
     'ant-design-vue/dist/antd.css',
   ],
 
@@ -114,5 +117,11 @@ export default {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        // global modules
+        _: 'lodash',
+      }),
+    ],
   },
 }

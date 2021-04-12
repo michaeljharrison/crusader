@@ -29,6 +29,7 @@
     "firebase": "^8.2.6",
     "nuxt": "^2.14.12",
     "slugify": "^1.4.6",
+    "vue-lodash": "^2.1.2",
     "vue-star": "^0.0.4"
   },
   "devDependencies": {

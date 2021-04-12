@@ -200,9 +200,12 @@ h6 {
   justify-content: center;
   margin-bottom: 0px !important;
 
-  .field-label {
-    height: 22px;
-  }
+label {
+  font-family: 'Conduit itc', sans-serif;
+  color: #fff !important;
+  font-weight: 400;
+  height: 22px;
+}
 }
 
 .ant-radio-group {

@@ -1,19 +1,58 @@
 <template>
   <div class="container">
     <div class="bigcontainer">
-      <h1>
-        {{ (crusade && crusade.Name) || 'New Crusade' }}
-      </h1>
-      <h3>
-        {{ (crusade && crusade.Faction) || 'Choose Faction' }}
-      </h3>
+      <h1>{{ crusade && crusade.Name }}</h1>
+      <a-form
+        :form="form"
+        layout="inline"
+        :label-col="{ span: 5 }"
+        :wrapper-col="{ span: 12 }"
+        @submit="handleSubmit"
+      >
+        <a-form-item label="Note">
+          <a-input
+            v-decorator="[
+              'note',
+              {
+                rules: [{ required: true, message: 'Please input your note!' }],
+              },
+            ]"
+            disabled
+          />
+        </a-form-item>
+        <a-form-item label="Gender">
+          <a-select
+            v-decorator="[
+              'gender',
+              {
+                rules: [
+                  { required: true, message: 'Please select your gender!' },
+                ],
+              },
+            ]"
+            placeholder="Select a option and change input text above"
+            @change="handleSelectChange"
+          >
+            <a-select-option value="male"> male </a-select-option>
+            <a-select-option value="female"> female </a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
+          <a-button type="primary" html-type="submit"> Submit </a-button>
+        </a-form-item>
+      </a-form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import constants from '~/store/constants'
-import { BattleReport, Faction, Team } from '~/store/types'
+import { BattleReport, Crusade, Faction, Team } from '~/store/types'
+
+function hasErrors(fieldsError) {
+  return Object.keys(fieldsError).some((field) => fieldsError[field])
+}
+
 export default {
   props: ['faction'],
   async asyncData({ params }) {
@@ -28,6 +67,8 @@ export default {
       name,
       crusade,
       loading,
+      hasErrors,
+      form: this.$form.createForm(this, { name: 'my_crusade' }),
     }
   },
   components: {},
@@ -45,7 +86,7 @@ export default {
       const fetchedId = this.$route.params.id
       // replace `getPost` with your data fetching util / API wrapper
       const crusadesRef = this.$fire.firestore.collection(
-        constants.COLLECTIONS.CRUSADES
+        constants.COLLECTIONS.TEAMS
       )
 
       try {

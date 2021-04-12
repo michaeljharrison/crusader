@@ -83,7 +83,7 @@ export default {
   data() {
     const team: Team = this.faction
     const color: String = `color: ${team.TeamColor}`
-    const factionString: String = team.Faction.replace('-', ' ')
+    const factionString: String = team.Faction.replaceAll('-', ' ')
     return { slug: team.Slug, team, factionString, color }
   },
 }

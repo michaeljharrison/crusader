@@ -83,13 +83,14 @@ export interface LoreFragment {
 export interface Crusade {
   Name: string,
   Faction: string,
+  Player: string,
   Battles: number,
   Won: number,
   Supply: number,
   SupplyUsed: number,
   Requisition: number,
   RequisitionUsed: number,
-  OrderOfBottle: Array<Unit>
+  OrderOfBattle: Array<Unit>
 }
 
 export interface Unit {

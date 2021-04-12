@@ -1,5 +1,6 @@
+import _ from 'lodash'
 import constants from './constants'
-import { BattleReport, Faction, Team } from './types'
+import { BattleReport, Crusade, Faction, Team } from './types'
 type vuexState = {
   isLoading: boolean
 }
@@ -150,6 +151,38 @@ export const actions = {
     }
     commit('SET_isLoading', false)
   },
+  async ACTION_createNewFaction(
+    { commit }: any,
+    options: { faction: any; fire: any }
+  ) {
+    commit('SET_isLoading', true) // Start proving (lock UI)
+    // Do some stuff
+    const { faction, fire } = options
+    const teamsRef = fire.firestore.collection(
+      constants.COLLECTIONS.TEAMS
+    )
+    try {
+      // Create Battle Report.
+      const now = new Date(Date.now());
+      faction.Name = _.lowerCase(faction.Name).replaceAll(' ','-');
+      const newCrusade : Crusade = {
+          'Created On': `${now.toDateString()} ${now.getHours()}:${now.getMinutes()}`,
+          Battles: 0,
+          Won: 0,
+          Supply: 0,
+          SupplyUsed: 0,
+          Requisition: 0,
+          RequisitionUsed: 0,
+          OrderOfBattle: [],
+          ...faction,
+      };
+      await teamsRef.doc(faction.Name).set(newCrusade)
+  } catch(error) {
+    console.error(error);
+    return
+  }
+  commit('SET_isLoading', false)
+}
 }
 
 const getFaction: any = async (name: string, collectionRef: any) => {

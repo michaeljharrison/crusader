@@ -7,6 +7,10 @@ export default {
     BATTLEREPORTS: 'battlereports',
     MISSIONS: 'missions',
     CRUSADES: 'crusades',
+    CONSTANTS: 'constants',
+  },
+  CONSTANTS_DOCUMENTS: {
+    FACTION_OPTIONS: 'FACTIONS',
   },
   TEAMS: {
     BLOODANGELS: 'blood-angels',
