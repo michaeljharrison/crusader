@@ -207,6 +207,9 @@ label {
   height: 22px;
 }
 }
+.ant-form-item-label {
+  min-width: 60px;
+}
 
 .ant-radio-group {
   display: flex !important;

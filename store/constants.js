@@ -8,6 +8,7 @@ export default {
     MISSIONS: 'missions',
     CRUSADES: 'crusades',
     CONSTANTS: 'constants',
+    ORDER_OF_BATTLE: 'OOB',
   },
   CONSTANTS_DOCUMENTS: {
     FACTION_OPTIONS: 'FACTIONS',

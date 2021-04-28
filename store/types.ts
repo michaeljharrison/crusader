@@ -12,33 +12,33 @@ export interface Faction {
 }
 
 export interface Team {
-'Battles Played': string 
-'Battles Won': string
-winRate: string
-'Collection ID': string
-'Created On': string
-'Crusade Champion': string
-'Faction': string
-'FeaturePhoto': string
-'Flavour': string
-FlavourQoute: string
-Gallery: string
-Icon: string
-'Item ID': string
-Leader: string
-LeaderPortrait: string
-Name: string
-Player: string
-'Published On': string
-Slug: string
-Superfaction: string
-TeamColor: string
-'Updated On': string
-'WZP-Doridia': string
-'WZP-Kjelstan': string
-'WZP-Ornakir': string
-'WZP-TelemonPrime': string
-'Win Ratio': string
+  'Battles Played': string
+  'Battles Won': string
+  winRate: string
+  'Collection ID': string
+  'Created On': string
+  'Crusade Champion': string
+  Faction: string
+  FeaturePhoto: string
+  Flavour: string
+  FlavourQoute: string
+  Gallery: string
+  Icon: string
+  'Item ID': string
+  Leader: string
+  LeaderPortrait: string
+  Name: string
+  Player: string
+  'Published On': string
+  Slug: string
+  Superfaction: string
+  TeamColor: string
+  'Updated On': string
+  'WZP-Doridia': string
+  'WZP-Kjelstan': string
+  'WZP-Ornakir': string
+  'WZP-TelemonPrime': string
+  'Win Ratio': string
 }
 export interface Battleground {
   description: string
@@ -48,90 +48,92 @@ export interface Battleground {
 }
 
 export interface BattleReport {
-  'Battle Report':string
-'Battle Report Big': string
-'Battleground':string
-'Collection ID':string
-'Created On': any
-Disabled: boolean
-Date:string
-Draw: boolean
-'Item ID':string
-'Marked for Greatness':string
-Mission:string
-Name:string
-Likes: number
-Photos:string
-'Power Level':number
-'Published On':string
-Slug:string
-'Team 1':string
-'Team 2':string
-'Updated On':string
-'Winning Team':string
+  'Battle Report': string
+  'Battle Report Big': string
+  Battleground: string
+  'Collection ID': string
+  'Created On': any
+  Disabled: boolean
+  Date: string
+  Draw: boolean
+  'Item ID': string
+  'Marked for Greatness': string
+  Mission: string
+  Name: string
+  Likes: number
+  Photos: string
+  'Power Level': number
+  'Published On': string
+  Slug: string
+  'Team 1': string
+  'Team 2': string
+  'Updated On': string
+  'Winning Team': string
 }
 
 export interface LoreFragment {
-  Contents: string,
-  'Created On': string,
-  Icon: String,
-  Name: string,
-  'Related Team': string,
+  Contents: string
+  'Created On': string
+  Icon: String
+  Name: string
+  'Related Team': string
   Slug: string
 }
 
 export interface Crusade {
-  Name: string,
-  Faction: string,
-  Player: string,
-  Battles: number,
-  Won: number,
-  Supply: number,
-  SupplyUsed: number,
-  Requisition: number,
-  RequisitionUsed: number,
+  Name: string
+  Faction: string
+  Player: string
+  Battles: number
+  Won: number
+  Supply: number
+  SupplyUsed: number
+  Requisition: number
+  RequisitionUsed: number
   OrderOfBattle: Array<Unit>
 }
 
 export interface Unit {
-  Name: string,
-  Type: string,
-  Division: Division,
-  Fluff: string,
-  Power: number,
-  Points: number,
-  IsWarlord: boolean,
-  Battles: number,
-  Survived: number,
+  Created: string
+  Name: string
+  Type: string
+  Division: Division
+  Fluff: string
+  Power: number
+  CP: number
+  Points: number
+  IsWarlord: boolean
+  Battles: number
+  Survived: number
   MarkedForGreatness: number
-  XP: number,
-  KillsMelee: number,
-  KillsRanged: number,
-  KillsPsychic: number,
-  Relic: Relic,
-  Trait: Trait,
-  Honours: Array<Honour>,
-  Scars: Array<Scars>,
-  Notes: string,
+  XP: number
+  KillsMelee: number
+  KillsRanged: number
+  KillsPsychic: number
+  Relic: Relic
+  Trait: Trait
+  Honours: Array<Honour>
+  Scars: Array<Scars>
+  Notes: string
 }
 
 export interface Relic {
-  Name: string,
+  Name: string
   Description: string
 }
 
 export interface Trait {
-  Name: string,
-  Description: string,
+  Name: string
+  Description: string
 }
 
 export interface Honour {
-  Name: string,
+  Name: string
   Description: string
 }
 
 export interface Scars {
-  Name: string,
+  Name: string
   Description: string
 }
 
@@ -141,5 +143,5 @@ enum Division {
   Elite,
   FastAttack,
   HeavySupport,
-  Transport
+  Transport,
 }
