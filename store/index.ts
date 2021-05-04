@@ -195,18 +195,21 @@ export const actions = {
     const { crusade, fire, unit } = options
     const teamsRef = fire.firestore.collection(constants.COLLECTIONS.TEAMS)
     try {
-      // First fetch the correct team.
-      console.log('Creating for team...')
-      console.log(crusade)
-      const teamRef = await teamsRef.doc(crusade.Name)
-
       // Create The Unit
       const now = new Date(Date.now())
       const newUnit: Unit = {
         Created: `${now.toDateString()} ${now.getHours()}:${now.getMinutes()}`,
         ...unit,
       }
-      await teamRef.doc(constants.COLLECTIONS.ORDER_OF_BATTLE).add(newUnit)
+
+      // First fetch the correct team.
+      const teamRef = await teamsRef.doc(crusade.Name)
+      const team = await teamRef.get()
+      const teamData = await team.data()
+      console.log(teamData)
+      console.log(constants.COLLECTIONS.ORDER_OF_BATTLE)
+      teamData[constants.COLLECTIONS.ORDER_OF_BATTLE].push(newUnit)
+      await teamRef.set(teamData)
     } catch (error) {
       console.error(error)
       return

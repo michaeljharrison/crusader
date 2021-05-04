@@ -6,23 +6,28 @@
           <NuxtLink to="/">HOME</NuxtLink>
         </a-menu-item>
         <a-menu-item key="2">
-          <NuxtLink to="/rules">RULES</NuxtLink>
+          <NuxtLink to="/crusades">CRUSADES</NuxtLink>
         </a-menu-item>
         <a-menu-item key="3">
-          <NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink>
+          <NuxtLink to="/rules">RULES</NuxtLink>
         </a-menu-item>
         <a-menu-item key="4">
-          <NuxtLink to="/teams">TEAMS</NuxtLink>
+          <NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink>
         </a-menu-item>
         <a-menu-item key="5">
+          <NuxtLink to="/teams">TEAMS</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="6">
           <NuxtLink to="/combatLog">COMBAT LOG</NuxtLink>
         </a-menu-item>
-        <a-menu-item key="6" class="submitBR">
+        <a-menu-item key="7" class="submitBR">
           <NuxtLink to="/battlereport">SUBMIT BATTLE REPORT</NuxtLink>
         </a-menu-item>
       </a-menu>
     </a-layout-header>
-    <Nuxt />
+    <a-layout-content>
+      <Nuxt />
+    </a-layout-content>
   </a-layout>
 </template>
 
@@ -79,5 +84,16 @@ html {
   float: right;
   margin-left: auto;
   background-color: #199687;
+}
+
+.layout {
+  height: 100%;
+}
+
+#__nuxt {
+  height: 100%;
+}
+#__layout {
+  height: 100%;
 }
 </style>

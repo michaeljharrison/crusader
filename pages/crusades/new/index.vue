@@ -1,89 +1,87 @@
 <template>
-  <div class="container">
-    <div class="bigcontainer">
-      <h1 class="h1">Begin your Crusade</h1>
-      <div class="line"></div>
-      <a-form :layout="formLayout" :form="form" @submit="handleSubmit">
-        <a-form-item
-          label="Player Name"
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
+  <div class="bigcontainer light">
+    <h1 class="h1">Begin your Crusade</h1>
+    <div class="line"></div>
+    <a-form :layout="formLayout" :form="form" @submit="handleSubmit">
+      <a-form-item
+        label="Player Name"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <a-input
+          v-decorator="[
+            'Player',
+            {
+              rules: [{ required: true, message: 'Who is your general?' }],
+            },
+          ]"
+          placeholder="Bam Everyman"
+        />
+      </a-form-item>
+      <a-form-item
+        label="Faction Name"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <a-input
+          v-decorator="[
+            'Name',
+            {
+              rules: [
+                {
+                  required: true,
+                  message: 'What name flies on your banner?',
+                },
+                {
+                  validator: factionNameValidator,
+                },
+              ],
+            },
+          ]"
+          placeholder="Mighty Ducks"
+        />
+      </a-form-item>
+      <a-form-item
+        label="Faction"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <a-select
+          v-decorator="[
+            'Faction',
+            {
+              rules: [{ required: true, message: 'Whom do you fight for?' }],
+            },
+          ]"
+          style="width: 120px"
+          placeholder="Choose your Loyalty"
         >
-          <a-input
-            v-decorator="[
-              'Player',
-              {
-                rules: [{ required: true, message: 'Who is your general?' }],
-              },
-            ]"
-            placeholder="Bam Everyman"
-          />
-        </a-form-item>
-        <a-form-item
-          label="Faction Name"
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
-        >
-          <a-input
-            v-decorator="[
-              'Name',
-              {
-                rules: [
-                  {
-                    required: true,
-                    message: 'What name flies on your banner?',
-                  },
-                  {
-                    validator: factionNameValidator,
-                  },
-                ],
-              },
-            ]"
-            placeholder="Mighty Ducks"
-          />
-        </a-form-item>
-        <a-form-item
-          label="Faction"
-          :label-col="formItemLayout.labelCol"
-          :wrapper-col="formItemLayout.wrapperCol"
-        >
-          <a-select
-            v-decorator="[
-              'Faction',
-              {
-                rules: [{ required: true, message: 'Whom do you fight for?' }],
-              },
-            ]"
-            style="width: 120px"
-            placeholder="Choose your Loyalty"
+          <a-select-option
+            v-for="(item, key) in factionOptions"
+            :key="key"
+            :value="item.slug"
           >
-            <a-select-option
-              v-for="(item, key) in factionOptions"
-              :key="key"
-              :value="item.slug"
-            >
-              {{ item.label }}
-            </a-select-option>
-          </a-select>
-        </a-form-item>
+            {{ item.label }}
+          </a-select-option>
+        </a-select>
+      </a-form-item>
 
-        <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
-          <a-button
-            type="primary"
-            html-type="submit"
-            :disabled="hasErrors(form.getFieldsError())"
-          >
-            Submit
-          </a-button>
-        </a-form-item>
-      </a-form>
-    </div>
+      <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
+        <a-button
+          type="primary"
+          html-type="submit"
+          :disabled="hasErrors(form.getFieldsError())"
+        >
+          Submit
+        </a-button>
+      </a-form-item>
+    </a-form>
   </div>
 </template>
 
 <script lang="ts">
-import constants from '~/store/constants'
 import _ from 'lodash'
+import constants from '~/store/constants'
 import { BattleReport, Faction, Team, Crusade } from '~/store/types'
 
 function hasErrors(fieldsError) {
@@ -91,6 +89,7 @@ function hasErrors(fieldsError) {
 }
 
 export default {
+  components: {},
   props: ['faction'],
   async asyncData({ params }) {
     const name = params.name
@@ -111,13 +110,6 @@ export default {
       form: this.$form.createForm(this, { name: 'new_crusade' }),
     }
   },
-  components: {},
-  watch: {
-    $route: 'fetchData',
-  },
-  created() {
-    this.fetchData()
-  },
   computed: {
     formItemLayout() {
       const { formLayout } = this
@@ -136,6 +128,12 @@ export default {
           }
         : {}
     },
+  },
+  watch: {
+    $route: 'fetchData',
+  },
+  created() {
+    this.fetchData()
   },
   mounted() {
     this.$nextTick(() => {

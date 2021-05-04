@@ -1,7 +1,6 @@
 <template>
   <a-drawer
     title="New Unit"
-    :width="720"
     :visible="visible"
     :body-style="{ paddingBottom: '80px' }"
     class="light"
@@ -205,7 +204,7 @@ export default Vue.extend({
             })
             this.$message.success(`Unit Created!`)
             setTimeout(() => {
-              // window.location.href = 'combatLog'
+              this.$props.close()
             }, 0)
           } catch (e) {
             console.error(e)
@@ -222,6 +221,10 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+.ant-drawer-content-wrapper {
+  width: 100% !important;
+}
+
 .ant-form-item-control-wrapper {
   width: 100%;
 }

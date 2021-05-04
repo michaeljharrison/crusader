@@ -132,7 +132,7 @@
       </a-form>
       <a-table
         :columns="columnsOOB"
-        :data-source="crusade && crusade.OOB"
+        :data-source="crusade && crusade[constants.COLLECTIONS.ORDER_OF_BATTLE]"
         :loading="loading"
       >
         <NuxtLink
@@ -218,6 +218,7 @@ export default {
     const crusade: Crusade | null = null
     return {
       name,
+      constants,
       crusade,
       loading,
       drawerVisible: false,
