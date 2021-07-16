@@ -8,13 +8,13 @@
         :style="{ lineHeight: '64px' }"
       >
         <a-menu-item key="1">
-          <NuxtLink to="/">HOME</NuxtLink>
+          <NuxtLink to="/">Back</NuxtLink>
         </a-menu-item>
-        <a-menu-item key="2">
-          <NuxtLink to="/crusader">CRUSADER</NuxtLink>
+        <a-menu-item v-if="currentUser">
+          Logged in as {{ currentUser.displayName }}
         </a-menu-item>
-        <a-menu-item key="3">
-          <NuxtLink to="/strongholder">STRONGHOLDER</NuxtLink>
+        <a-menu-item v-if="currentUser" key="2">
+          <a-button type="danger" @click="signOut">Log Out</a-button>
         </a-menu-item>
       </a-menu>
     </a-layout-header>
@@ -23,6 +23,29 @@
     </a-layout-content>
   </a-layout>
 </template>
+
+<script>
+import SignIn from '~/components/SignIn.vue'
+
+export default {
+  components: {
+    SignIn,
+  },
+  layout: 'strongholder',
+  computed: {
+    currentUser() {
+      return this.$store.state.user
+    },
+  },
+  methods: {
+    signOut() {
+      console.log('signOut')
+      // this.$fireAuth.signOut()
+      this.$fire.auth.signOut()
+    },
+  },
+}
+</script>
 
 <style lang="scss">
 html {

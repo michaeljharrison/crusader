@@ -1,21 +1,93 @@
 import _ from 'lodash'
 import constants from './constants'
-import { BattleReport, Crusade, Faction, Team, Unit } from './types'
+import {
+  BattleReport,
+  Crusade,
+  Faction,
+  Team,
+  Unit,
+  Strongholder,
+} from './types'
+
+export const plugins = []
+
 type vuexState = {
   isLoading: boolean
+  user: any
+  creatingStrongholder: boolean
+  newStrongholder: Strongholder | Object
+  strongholdsList: Array<Strongholder>
 }
 
 export const state: any = (): vuexState => ({
   isLoading: false,
+  user: false,
+  creatingStrongholder: false,
+  newStrongholder: {},
+  strongholdsList: [],
 })
 
 export const mutations = {
   SET_isLoading(state: vuexState, isLoading: boolean) {
     state.isLoading = isLoading
   },
+  SET_strongholdsList(state: vuexState, newList: Array<Strongholder>) {
+    state.strongholdsList = newList
+  },
+  ADD_strongholdsList(state: vuexState, newStronghold: Strongholder) {
+    state.strongholdsList.push(newStronghold)
+  },
+  TOGGLE_creatingStrongholder(state: vuexState) {
+    state.creatingStrongholder = !state.creatingStrongholder
+  },
+  SET_authState: (state, { authUser, claims }) => {
+    if (authUser) {
+      state.user = {
+        uid: authUser.uid,
+        // email: authUser.email,
+        displayName: authUser.displayName,
+      }
+    } else {
+      state.user = false
+    }
+  },
 }
 
 export const actions = {
+  ACTION_createNewStronghold(
+    { commit, state }: any,
+    options: { sh: Strongholder; fire: any }
+  ) {
+    commit('SET_isLoading', true) // Start proving (lock UI)
+    const { sh } = options
+    // Store strongholder in local storage:
+    console.log(state)
+    if (state.strongholdsList) {
+      commit('ADD_strongholdsList', sh)
+    } else {
+      commit('SET_strongholdsList', [sh])
+    }
+
+    /* 
+    FIRESTORE USAGE
+    const { sh, fire }    = options
+    const collectionRef = fire.firestore.collection(
+      constants.COLLECTIONS.STRONGHOLDER
+    )
+    try {
+      // Create Battle Report.
+      const now = new Date(Date.now())
+      await collectionRef.add({
+        'Created On': `${now.toDateString()} ${now.getHours()}:${now.getMinutes()}`,
+        ...sh,
+      })
+
+    } catch (e) {
+      console.error(e)
+      return
+    } */
+    commit('SET_isLoading', false)
+  },
   async ACTION_submitBattleReport(
     { commit }: any,
     options: { report: BattleReport; fire: any }

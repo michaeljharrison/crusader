@@ -41,10 +41,11 @@ export default {
     '@/assets/style/font.scss',
     '@/assets/style/type.scss',
     'ant-design-vue/dist/antd.css',
+    '@/assets/style/strongholder.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/antd-ui'],
+  plugins: ['@/plugins/antd-ui', { src: '~/plugins/persistedState.client.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -70,11 +71,21 @@ export default {
       projectId: 'crusader-3cc51',
       storageBucket: 'crusader-3cc51.appspot.com',
       messagingSenderId: '177105489838',
-      appId: '1:177105489838:web:baf620bdb633893483423f',
+      appId: '1:177105489838:web:baf620bdb63389 3483423f',
       measurementId: 'G-MMNYHW03JF',
     },
     services: {
-      auth: false,
+      auth: {
+        persistence: 'local', // default
+        initialize: {
+          onAuthStateChangedMutation: 'SET_authState',
+          subscribeManually: false,
+        },
+        ssr: false, // default
+        emulatorPort: 9099,
+        emulatorHost: 'http://localhost',
+        disableEmulatorWarnings: false,
+      },
       firestore: true,
       functions: false,
       storage: true,

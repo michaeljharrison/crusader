@@ -9,6 +9,7 @@ export default {
     CRUSADES: 'crusades',
     CONSTANTS: 'constants',
     ORDER_OF_BATTLE: 'OrderOfBattle',
+    STRONGHOLDER: 'strongholder',
   },
   CONSTANTS_DOCUMENTS: {
     FACTION_OPTIONS: 'FACTIONS',
@@ -16,7 +17,6 @@ export default {
   TEAMS: {
     BLOODANGELS: 'blood-angels',
     CULTOFTHELIGHTNINGEATERS: 'cult-of-the-lightning-eaters',
-    DEATHGUARD: 'death-guard',
     DEATHGUARD: 'mortarians-anvil',
     HEARDSOFTHEWRITHINGNIGHT: 'heralds-of-the-writhing-night',
     NARTEKHDYNASTY: 'nartekh-dynasty',
@@ -32,5 +32,8 @@ export default {
     DARKANGELS: 'dark-angels',
     CHAOS: 'chaos',
     NECRON: 'necron',
+  },
+  LOCAL_STORAGE: {
+    STRONGHOLDER: 'strongholder_data',
   },
 }

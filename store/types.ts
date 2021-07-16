@@ -145,3 +145,24 @@ enum Division {
   HeavySupport,
   Transport,
 }
+
+export interface Army {
+  Icon: string
+  Faction: string
+  SubFaction: string
+  RealmOfOrigin: string
+  StartingSize: number
+}
+
+export interface Stronghold {
+  Name: string
+  Type: string
+  Population: string
+  Barracks: string
+  Outposts: string
+  Region: string
+}
+export interface Strongholder {
+  Army: Army
+  Stronghold: Stronghold
+}

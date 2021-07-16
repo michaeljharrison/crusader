@@ -1,0 +1,71 @@
+$cardBG: #F5F5F5;
+
+#strongholderRoot {
+  height: 100%;
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .container {
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: unset;      
+    background-color: white;
+  }
+  .container.login {
+    height:100%;
+    justify-content: center;
+  }
+
+  .armyCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px;
+  background: #F5F5F5;
+  border: 1px solid #8E8E95;
+  height: auto;
+  p {
+    font-family: Minion Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.05em;
+    text-transform: capitalize;
+    font-variant: small-caps;
+
+    color: #0F1123;
+  }
+}
+  
+  .armyCard.newArmy {
+      
+  }
+
+  .ant-btn {
+    flex-grow: 1;
+    margin-left: 12px;
+    margin-right: 12px; 
+  }
+
+  .container {
+
+  }
+  .createStrongholderRoot {
+
+  }
+}

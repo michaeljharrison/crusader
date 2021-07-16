@@ -11,10 +11,25 @@
           <NuxtLink to="/">HOME</NuxtLink>
         </a-menu-item>
         <a-menu-item key="2">
-          <NuxtLink to="/crusader">CRUSADER</NuxtLink>
+          <NuxtLink to="/crusades">CRUSADES</NuxtLink>
         </a-menu-item>
         <a-menu-item key="3">
-          <NuxtLink to="/strongholder">STRONGHOLDER</NuxtLink>
+          <NuxtLink to="/rules">RULES</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="4">
+          <NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="5">
+          <NuxtLink to="/teams">TEAMS</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="6">
+          <NuxtLink to="/combatLog">COMBAT LOG</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="7" class="submitBR">
+          <NuxtLink to="/battlereport">SUBMIT BATTLE REPORT</NuxtLink>
+        </a-menu-item>
+        <a-menu-item key="8" class="submitBR">
+          <NuxtLink to="/login">Login</NuxtLink>
         </a-menu-item>
       </a-menu>
     </a-layout-header>
