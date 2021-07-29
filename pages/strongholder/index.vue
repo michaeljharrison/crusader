@@ -12,6 +12,24 @@
           </a-button>
         </div>
       </div>
+      <div
+        v-else-if="activeStronghold"
+        style="display: flex; flex-direction: column; width: 100%"
+      >
+        <ViewStronghold :stronghold="activeStronghold"></ViewStronghold>
+        <div style="display: flex; flex-direction: row">
+          <a-button
+            type="danger"
+            @click="
+              () => {
+                selectStronghold(null)
+              }
+            "
+          >
+            <p>Back</p>
+          </a-button>
+        </div>
+      </div>
       <div v-else>
         <h2>Welcome {{ user.displayName }}</h2>
         <a-button class="armyCard newArmy" @click="toggleCreating">
@@ -25,9 +43,16 @@
           :item-size="32"
           key-field="Army Name"
         >
-          <div class="user">
-            {{ item['Army Name'] }}
-          </div>
+          <a-button
+            class="armyCard newArmy"
+            @click="
+              () => {
+                selectStronghold(item)
+              }
+            "
+          >
+            <p>{{ item['Army Name'] }}</p>
+          </a-button>
         </RecycleScroller>
       </div>
     </div>
@@ -41,19 +66,30 @@
 import { mapState } from 'vuex'
 import { RecycleScroller } from 'vue-virtual-scroller'
 import SignIn from '~/components/SignIn.vue'
+import ViewStronghold from '~/components/strongholder/ViewStronghold.vue'
 export default {
   components: {
     SignIn,
     RecycleScroller,
+    ViewStronghold,
   },
   layout: 'strongholder',
   data() {
     return {}
   },
-  computed: mapState(['user', 'creatingStrongholder', 'strongholdsList']),
+  computed: mapState([
+    'user',
+    'creatingStrongholder',
+    'strongholdsList',
+    'activeStronghold',
+  ]),
   methods: {
     toggleCreating() {
       this.$store.commit('TOGGLE_creatingStrongholder')
+    },
+    selectStronghold(stronghold) {
+      console.log(stronghold)
+      this.$store.commit('SET_activeStronghold', stronghold)
     },
     signOut() {
       // this.$fireAuth.signOut()

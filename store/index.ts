@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { createLogger } from 'vuex'
 import constants from './constants'
 import {
   BattleReport,
@@ -9,7 +10,7 @@ import {
   Strongholder,
 } from './types'
 
-export const plugins = []
+export const plugins = [createLogger()]
 
 type vuexState = {
   isLoading: boolean
@@ -17,6 +18,7 @@ type vuexState = {
   creatingStrongholder: boolean
   newStrongholder: Strongholder | Object
   strongholdsList: Array<Strongholder>
+  activeStronghold: Strongholder | null
 }
 
 export const state: any = (): vuexState => ({
@@ -25,6 +27,7 @@ export const state: any = (): vuexState => ({
   creatingStrongholder: false,
   newStrongholder: {},
   strongholdsList: [],
+  activeStronghold: null,
 })
 
 export const mutations = {
@@ -36,6 +39,9 @@ export const mutations = {
   },
   ADD_strongholdsList(state: vuexState, newStronghold: Strongholder) {
     state.strongholdsList.push(newStronghold)
+  },
+  SET_activeStronghold(state: vuexState, stronghold: Strongholder | null) {
+    state.activeStronghold = stronghold
   },
   TOGGLE_creatingStrongholder(state: vuexState) {
     state.creatingStrongholder = !state.creatingStrongholder
@@ -50,6 +56,10 @@ export const mutations = {
     } else {
       state.user = false
     }
+  },
+  SET_updateStronghold: (state: vuexState, { activeIndex, stronghold }) => {
+    console.log('Updating Stronghold!')
+    state.strongholdsList[activeIndex] = stronghold
   },
 }
 
@@ -87,6 +97,15 @@ export const actions = {
       return
     } */
     commit('SET_isLoading', false)
+  },
+  ACTION_saveStronghold({ commit, state }: any, options: { stronghold: any }) {
+    commit('SET_isLoading', true) // Start proving (lock UI)
+    const { stronghold } = options
+    const activeIndex = _.findIndex(state.strongholdsList, {
+      'Army Name': stronghold['Army Name'],
+    })
+    // Apply edits to selected stronghold.
+    commit('SET_updateStronghold', { stronghold, activeIndex })
   },
   async ACTION_submitBattleReport(
     { commit }: any,
