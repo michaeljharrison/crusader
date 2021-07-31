@@ -42,7 +42,7 @@
           <span v-if="record.editable">
             <a @click="() => save(record.key)">Save</a>
             <a-popconfirm
-              title="Sure to cancel?"
+              title="Discard changes?"
               @confirm="() => cancel(record.key)"
             >
               <a>Cancel</a>
@@ -51,6 +51,9 @@
           <span v-else>
             <a :disabled="editingKey !== ''" @click="() => edit(record.key)"
               >Edit</a
+            >
+            <a :disabled="editingKey !== ''" @click="() => erase(record.key)"
+              >Delete</a
             >
           </span>
         </div>
@@ -163,6 +166,29 @@ export default {
       this.editingKey = target.key
       this.tableData = newData
       this.cacheData = newCacheData
+    },
+    async erase(key) {
+      const newData = [...this.tableData]
+      const newCacheData = [...this.cacheData]
+      const target = newData.filter((item) => key === item.key)[0]
+      const cacheTarget = newCacheData.filter((item) => key === item.key)[0]
+      const deleteIndex = _.findIndex(newData, { key: target.key })
+      const deleteCacheIndex = _.findIndex(newCacheData, { key: target.key })
+      newData.splice(deleteIndex, 1)
+      newCacheData.splice(deleteCacheIndex, 1)
+      this.cacheData = newCacheData
+      this.tableData = newData
+
+      try {
+        await this.$store.dispatch('ACTION_saveTerritories', {
+          stronghold: this.stronghold,
+          territories: this.tableData,
+        })
+        this.$message.success(`Territory Deleted!`)
+      } catch (e) {
+        console.error(e)
+        this.$message.error(`Unable to update territory! I blame goblins.`)
+      }
     },
     cancel(key) {
       const newData = [...this.tableData]
