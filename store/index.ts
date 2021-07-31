@@ -8,6 +8,8 @@ import {
   Team,
   Unit,
   Strongholder,
+  Stronghold,
+  Territory,
 } from './types'
 
 export const plugins = [createLogger()]
@@ -17,7 +19,7 @@ type vuexState = {
   user: any
   creatingStrongholder: boolean
   newStrongholder: Strongholder | Object
-  strongholdsList: Array<Strongholder>
+  strongholdsList: Array<Stronghold>
   activeStronghold: Strongholder | null
 }
 
@@ -34,10 +36,10 @@ export const mutations = {
   SET_isLoading(state: vuexState, isLoading: boolean) {
     state.isLoading = isLoading
   },
-  SET_strongholdsList(state: vuexState, newList: Array<Strongholder>) {
+  SET_strongholdsList(state: vuexState, newList: Array<Stronghold>) {
     state.strongholdsList = newList
   },
-  ADD_strongholdsList(state: vuexState, newStronghold: Strongholder) {
+  ADD_strongholdsList(state: vuexState, newStronghold: Stronghold) {
     state.strongholdsList.push(newStronghold)
   },
   SET_activeStronghold(state: vuexState, stronghold: Strongholder | null) {
@@ -58,8 +60,13 @@ export const mutations = {
     }
   },
   SET_updateStronghold: (state: vuexState, { activeIndex, stronghold }) => {
-    console.log('Updating Stronghold!')
     state.strongholdsList[activeIndex] = stronghold
+  },
+  SET_strongholdTerritories: (
+    state: vuexState,
+    { activeIndex, territories }
+  ) => {
+    state.strongholdsList[activeIndex].Territories = territories
   },
 }
 
@@ -106,6 +113,22 @@ export const actions = {
     })
     // Apply edits to selected stronghold.
     commit('SET_updateStronghold', { stronghold, activeIndex })
+  },
+  ACTION_saveTerritories(
+    { commit, state }: any,
+    options: { stronghold: Stronghold; territories: Array<Territory> }
+  ) {
+    commit('SET_isLoading', true) // Start proving (lock UI)
+    const { stronghold, territories } = options
+    const activeIndex = _.findIndex(state.strongholdsList, {
+      'Army Name': stronghold['Army Name'],
+    })
+    // Apply edits to selected stronghold.
+    commit('SET_strongholdTerritories', {
+      activeIndex,
+      stronghold,
+      territories,
+    })
   },
   async ACTION_submitBattleReport(
     { commit }: any,

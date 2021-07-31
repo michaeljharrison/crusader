@@ -218,8 +218,7 @@
           </div>
         </div>
         <div class="section">
-          <h3>Territories</h3>
-          <Territories :territories="currentStronghold.Territories" />
+          <Territories :stronghold="currentStronghold" />
         </div>
       </div>
       {{ JSON.stringify(stronghold) }}

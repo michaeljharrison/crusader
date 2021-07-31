@@ -154,6 +154,12 @@ export interface Army {
   StartingSize: number
 }
 
+export interface Territory {
+  Name: string
+  'Size & Type': string
+  Upgrades: String
+}
+
 export interface Stronghold {
   Name: string
   Type: string
@@ -161,7 +167,9 @@ export interface Stronghold {
   Barracks: string
   Outposts: string
   Region: string
+  Territories: Array<Territory>
 }
+
 export interface Strongholder {
   Army: Army
   Stronghold: Stronghold
