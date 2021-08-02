@@ -29,7 +29,7 @@
     "firebase": "^8.2.6",
     "firebaseui": "^4.8.0",
     "nuxt": "^2.14.12",
-    "slugify": "^1.4.6",
+    "slugify": "^1.6.0",
     "vue-json-pretty": "^1.8.1",
     "vue-lodash": "^2.1.2",
     "vue-star": "^0.0.4",
