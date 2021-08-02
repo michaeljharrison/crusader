@@ -220,8 +220,14 @@
         <div class="section">
           <Territories :stronghold="currentStronghold" />
         </div>
+        <div class="section">
+          <OrderOfBattle :stronghold="currentStronghold" />
+        </div>
       </div>
-      {{ JSON.stringify(stronghold) }}
+      <div class="data">
+        <h3>Stronghold Data:</h3>
+        <VueJsonPretty :data="stronghold" show-length> </VueJsonPretty>
+      </div>
     </div>
     <div v-else class="container login">
       <sign-in></sign-in>
@@ -233,9 +239,15 @@
 import { mapState } from 'vuex'
 import CONSTANTS from '@/store/constants/crusader'
 import Territories from '@/components/strongholder/Territories.vue'
+import OrderOfBattle from '@/components/strongholder/OrderOfBattle.vue'
+import VueJsonPretty from 'vue-json-pretty'
+import 'vue-json-pretty/lib/styles.css'
+
 export default {
   components: {
     Territories,
+    OrderOfBattle,
+    VueJsonPretty,
   },
   props: ['stronghold'],
   data() {

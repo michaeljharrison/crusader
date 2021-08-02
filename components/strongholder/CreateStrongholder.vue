@@ -262,7 +262,6 @@ export default {
       e.preventDefault()
       this.form.validateFields(async (err: any, values: any) => {
         if (!err) {
-          this.$message.loading(`Creating new Stronghold...`)
           try {
             await this.$store.dispatch('ACTION_createNewStronghold', {
               fire: this.$fire,

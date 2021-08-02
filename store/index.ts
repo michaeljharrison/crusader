@@ -68,17 +68,24 @@ export const mutations = {
   ) => {
     state.strongholdsList[activeIndex].Territories = territories
   },
+  SET_strongholdOOB: (state: vuexState, { activeIndex, OOB }) => {
+    state.strongholdsList[activeIndex].OrderOfBattle = OOB
+  },
 }
 
 export const actions = {
   ACTION_createNewStronghold(
     { commit, state }: any,
-    options: { sh: Strongholder; fire: any }
+    options: { sh: Stronghold; fire: any }
   ) {
     commit('SET_isLoading', true) // Start proving (lock UI)
     const { sh } = options
-    // Store strongholder in local storage:
-    console.log(state)
+    if (!sh.OrderOfBattle) {
+      sh.OrderOfBattle = []
+    }
+    if (!sh.Territories) {
+      sh.Territories = []
+    }
     if (state.strongholdsList) {
       commit('ADD_strongholdsList', sh)
     } else {
@@ -128,6 +135,22 @@ export const actions = {
       activeIndex,
       stronghold,
       territories,
+    })
+  },
+  ACTION_saveOOB(
+    { commit, state }: any,
+    options: { stronghold: Stronghold; OOB: Array<Unit> }
+  ) {
+    commit('SET_isLoading', true) // Start proving (lock UI)
+    const { stronghold, OOB } = options
+    const activeIndex = _.findIndex(state.strongholdsList, {
+      'Army Name': stronghold['Army Name'],
+    })
+    // Apply edits to selected stronghold.
+    commit('SET_strongholdOOB', {
+      activeIndex,
+      stronghold,
+      OOB,
     })
   },
   async ACTION_submitBattleReport(
@@ -244,8 +267,7 @@ export const actions = {
         ...report,
       })
     } catch (e) {
-      console.log(e)
-      alert(e)
+      console.error(e)
       return
     }
     commit('SET_isLoading', false)
@@ -320,8 +342,6 @@ export const actions = {
       const teamRef = await teamsRef.doc(crusade.Name)
       const team = await teamRef.get()
       const teamData = await team.data()
-      console.log(teamData)
-      console.log(constants.COLLECTIONS.ORDER_OF_BATTLE)
       teamData[constants.COLLECTIONS.ORDER_OF_BATTLE].push(newUnit)
       await teamRef.set(teamData)
     } catch (error) {
@@ -337,7 +357,6 @@ const getFaction: any = async (name: string, collectionRef: any) => {
   let doc: any = await ref.get()
   if (!doc.exists) {
     // Try lower case.
-    console.log('Cant find doc, trying lower case')
     doc = await collectionRef.doc(name.toLowerCase())
   }
   if (!doc.exists) {
@@ -352,11 +371,10 @@ const getBattleReport: any = async (
   report: BattleReport,
   collectionRef: any
 ) => {
-  console.log(`Finding BR ${report}`)
   const ref: any = await collectionRef.doc(report.Slug)
   const doc: any = await ref.get()
   if (!doc.exists) {
-    console.log(`Can't find report!`)
+    console.error(`Can't find report!`)
   }
   return ref
 }

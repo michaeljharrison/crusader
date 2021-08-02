@@ -168,6 +168,7 @@ export interface Stronghold {
   Outposts: string
   Region: string
   Territories: Array<Territory>
+  OrderOfBattle: Array<Unit>
 }
 
 export interface Strongholder {
