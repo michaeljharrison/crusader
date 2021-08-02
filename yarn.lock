@@ -3546,17 +3546,16 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@^88.0.0:
-  version "88.0.0"
-  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-88.0.0.tgz#6833fffd516db23c811eeafa1ee1069b5a12fd2f"
-  integrity sha512-EE8rXh7mikxk3VWKjUsz0KCUX8d3HkQ4HgMNJhWrWjzju12dKPPVHO9MY+YaAI5ryXrXGNf0Y4HcNKgW36P/CA==
+chromedriver@^92.0.1:
+  version "92.0.1"
+  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-92.0.1.tgz#3e28b7e0c9fb94d693cf74d51af0c29d57f18dca"
+  integrity sha512-LptlDVCs1GgyFNVbRoHzzy948JDVzTgGiVPXjNj385qXKQP3hjAVBIgyvb/Hco0xSEW8fjwJfsm1eQRmu6t4pQ==
   dependencies:
     "@testim/chrome-version" "^1.0.7"
     axios "^0.21.1"
     del "^6.0.0"
     extract-zip "^2.0.1"
     https-proxy-agent "^5.0.0"
-    mkdirp "^1.0.4"
     proxy-from-env "^1.1.0"
     tcp-port-used "^1.0.1"
 
