@@ -1,22 +1,7 @@
-import axios from 'axios'
+// import axios from 'axios'
 import webpack from 'webpack'
 
 export default {
-  generate: {
-    crawler: true,
-    routes() {
-      return axios
-        .get(
-          'https://firestore.googleapis.com/v1/projects/crusader-3cc51/databases/(default)/documents/battlereports'
-        )
-        .then((res) => {
-          return res.data.documents.map((br) => {
-            const arr = br.name.split('/')
-            return '/combatLog/' + arr[arr.length - 1]
-          })
-        })
-    },
-  },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -70,7 +55,7 @@ export default {
 
   firebase: {
     config: {
-      apiKey: 'AIzaSyC9_6TRdA5drVlpwpRh1uQ_-gnVqe2ZkNU',
+      apiKey: 'AIzaSyBJbFtUL95rKri_xd-_EZtKEf7xlNc0-Jk',
       authDomain: 'crusader-3cc51.firebaseapp.com',
       projectId: 'crusader-3cc51',
       storageBucket: 'crusader-3cc51.appspot.com',
