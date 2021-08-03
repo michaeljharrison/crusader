@@ -138,7 +138,7 @@
         <NuxtLink
           slot="Name"
           slot-scope="Name, record"
-          :to="'/combatLog/' + record.Slug"
+          :to="'/crusader/combatLog/' + record.Slug"
           >{{ Name || 'UNAMED BATTLE' }}</NuxtLink
         >
         <span slot="Date" slot-scope="Date, record">{{

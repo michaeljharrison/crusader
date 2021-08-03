@@ -8,28 +8,28 @@
         :style="{ lineHeight: '64px' }"
       >
         <a-menu-item key="1">
-          <NuxtLink to="/">HOME</NuxtLink>
+          <NuxtLink to="/crusader">HOME</NuxtLink>
         </a-menu-item>
         <a-menu-item key="2">
-          <NuxtLink to="/crusades">CRUSADES</NuxtLink>
+          <NuxtLink to="/crusader/crusades">CRUSADES</NuxtLink>
         </a-menu-item>
         <a-menu-item key="3">
-          <NuxtLink to="/rules">RULES</NuxtLink>
+          <NuxtLink to="/crusader/rules">RULES</NuxtLink>
         </a-menu-item>
         <a-menu-item key="4">
-          <NuxtLink to="/battlegrounds">BATTLEGROUNDS</NuxtLink>
+          <NuxtLink to="/crusader/battlegrounds">BATTLEGROUNDS</NuxtLink>
         </a-menu-item>
         <a-menu-item key="5">
-          <NuxtLink to="/teams">TEAMS</NuxtLink>
+          <NuxtLink to="/crusader/teams">TEAMS</NuxtLink>
         </a-menu-item>
         <a-menu-item key="6">
-          <NuxtLink to="/combatLog">COMBAT LOG</NuxtLink>
+          <NuxtLink to="/crusader/combatLog">COMBAT LOG</NuxtLink>
         </a-menu-item>
         <a-menu-item key="7" class="submitBR">
-          <NuxtLink to="/battlereport">SUBMIT BATTLE REPORT</NuxtLink>
+          <NuxtLink to="/crusader/battlereport">SUBMIT BATTLE REPORT</NuxtLink>
         </a-menu-item>
         <a-menu-item key="8" class="submitBR">
-          <NuxtLink to="/login">Login</NuxtLink>
+          <NuxtLink to="/crusader/login">Login</NuxtLink>
         </a-menu-item>
       </a-menu>
     </a-layout-header>

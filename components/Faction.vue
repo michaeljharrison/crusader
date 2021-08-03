@@ -5,12 +5,12 @@
         <div class="div-team-header">
           <div class="div-team-name">
             <div class="div-block-18">
-              <TeamIcon :teamSlug="team.Slug" />
+              <TeamIcon :team-slug="team.Slug" />
               <h1 class="h1" :style="color">
                 {{ (team && team.Name) || 'Loading...' }}
               </h1>
             </div>
-            <NuxtLink class="button w-button" :to="'/teams/' + slug"
+            <NuxtLink class="button w-button" :to="'/crusader/teams/' + slug"
               >SEE DETAILS</NuxtLink
             >
           </div>
@@ -72,14 +72,14 @@
 
 <script lang="ts">
 import { Team } from '~/store/types'
-const slugify = require('slugify')
 import TeamIcon from '~/components/TeamIcon.vue'
+const slugify = require('slugify')
 
 export default {
-  props: ['faction'],
   components: {
     TeamIcon,
   },
+  props: ['faction'],
   data() {
     const team: Team = this.faction
     const color: String = `color: ${team.TeamColor}`

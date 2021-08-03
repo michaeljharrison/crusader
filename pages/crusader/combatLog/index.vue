@@ -7,8 +7,8 @@
         :data-source="data"
         :loading="loadingData"
       >
-        <div class="column center" slot="Name" slot-scope="Name, record">
-          <TeamIcon :teamSlug="record.Slug"></TeamIcon>
+        <div slot="Name" slot-scope="Name, record" class="column center">
+          <TeamIcon :team-slug="record.Slug"></TeamIcon>
           <p :style="record.TeamColor">{{ Name }}</p>
         </div>
       </a-table>
@@ -21,7 +21,7 @@
         <NuxtLink
           slot="Name"
           slot-scope="Name, record"
-          :to="'/combatLog/' + record.Slug"
+          :to="'/crusader/combatLog/' + record.Slug"
           >{{ Name || 'UNAMED BATTLE' }}</NuxtLink
         >
         <span slot="Date" slot-scope="Date, record">{{
@@ -147,6 +147,9 @@ const columnsBattleLog = [
 const data: Faction[] = []
 const brData: BattleReport[] = []
 export default {
+  components: {
+    TeamIcon,
+  },
   data() {
     return {
       loadingData: true,
@@ -156,9 +159,6 @@ export default {
       columnsLeaderboard,
       columnsBattleLog,
     }
-  },
-  components: {
-    TeamIcon,
   },
   watch: {
     // call again the method if the route changes
@@ -237,9 +237,9 @@ export default {
         vm.brData = []
         docs.forEach((battleReport: any) => {
           const br: BattleReport = battleReport.data()
-          if (!br['Name']) {
-            br['Name'] = battleReport.id
-            br['Slug'] = battleReport.id
+          if (!br.Name) {
+            br.Name = battleReport.id
+            br.Slug = battleReport.id
           }
           if (br['Created On']) {
             br['Created On'] = new Date(
