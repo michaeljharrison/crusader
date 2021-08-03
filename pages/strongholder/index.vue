@@ -64,11 +64,13 @@ import { mapState } from 'vuex'
 import { RecycleScroller } from 'vue-virtual-scroller'
 // import SignIn from '~/components/SignIn.vue'
 import ViewStronghold from '~/components/strongholder/ViewStronghold.vue'
+import CreateStrongholder from '~/components/strongholder/CreateStrongholder.vue'
 export default {
   components: {
     // SignIn,
     RecycleScroller,
     ViewStronghold,
+    CreateStrongholder,
   },
   layout: 'strongholder',
   data() {

@@ -2,32 +2,28 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "type": "edge",
       "request": "launch",
-      "name": "client: chrome",
+      "name": "client: edge",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}/src",
+      "breakOnLoad": true,
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
     },
     {
       "type": "node",
       "request": "launch",
+      "runtimeExecutable": "yarn",
       "name": "server: nuxt",
       "args": ["dev"],
-      "osx": {
-        "program": "${workspaceFolder}/node_modules/.bin/nuxt"
-      },
-      "linux": {
-        "program": "${workspaceFolder}/node_modules/.bin/nuxt"
-      },
-      "windows": {
-        "program": "${workspaceFolder}/node_modules/nuxt/bin/nuxt.js"
-      }
     }
   ],
   "compounds": [
     {
       "name": "fullstack: nuxt",
-      "configurations": ["server: nuxt", "client: chrome"]
+      "configurations": ["server: nuxt", "client: edge"]
     }
   ]
 }
