@@ -10,12 +10,12 @@
         <a-menu-item key="1">
           <NuxtLink to="/">Back</NuxtLink>
         </a-menu-item>
-        <a-menu-item v-if="currentUser">
+        <!--  <a-menu-item v-if="currentUser">
           Logged in as {{ currentUser.displayName }}
         </a-menu-item>
         <a-menu-item v-if="currentUser" key="2">
           <a-button type="danger" @click="signOut">Log Out</a-button>
-        </a-menu-item>
+        </a-menu-item> -->
       </a-menu>
     </a-layout-header>
     <a-layout-content>
@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import SignIn from '~/components/SignIn.vue'
+// import SignIn from '~/components/SignIn.vue'
 
 export default {
   components: {
-    SignIn,
+    // SignIn,
   },
   layout: 'strongholder',
   computed: {

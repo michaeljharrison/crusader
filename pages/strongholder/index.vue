@@ -1,6 +1,6 @@
 <template>
   <div id="strongholderRoot" class="strongholderRoot">
-    <div v-if="user" class="container">
+    <div class="container">
       <div
         v-if="creatingStrongholder"
         style="display: flex; flex-direction: column; width: 100%"
@@ -56,20 +56,17 @@
         </RecycleScroller>
       </div>
     </div>
-    <div v-else class="container login">
-      <sign-in></sign-in>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { mapState } from 'vuex'
 import { RecycleScroller } from 'vue-virtual-scroller'
-import SignIn from '~/components/SignIn.vue'
+// import SignIn from '~/components/SignIn.vue'
 import ViewStronghold from '~/components/strongholder/ViewStronghold.vue'
 export default {
   components: {
-    SignIn,
+    // SignIn,
     RecycleScroller,
     ViewStronghold,
   },

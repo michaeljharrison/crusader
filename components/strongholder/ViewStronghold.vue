@@ -1,6 +1,6 @@
 <template>
   <div id="createStrongholderRoot" class="createStrongholderRoot">
-    <div v-if="user" class="container">
+    <div class="container">
       <a-alert v-if="hasEdited" message="Warning" type="warning" show-icon>
         <div slot="description" class="alertDescription">
           <p>You have unsaved changes on your stronghold!</p>
@@ -228,9 +228,6 @@
         <h3>Stronghold Data:</h3>
         <VueJsonPretty :data="stronghold" show-length> </VueJsonPretty>
       </div>
-    </div>
-    <div v-else class="container login">
-      <sign-in></sign-in>
     </div>
   </div>
 </template>

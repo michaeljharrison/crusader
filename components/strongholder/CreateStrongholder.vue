@@ -1,6 +1,6 @@
 <template>
   <div id="createStrongholderRoot" class="createStrongholderRoot">
-    <div v-if="user" class="container">
+    <div class="container">
       <a-form
         id="wf-form-create-strongholder"
         name="wf-form-create-strongholder"
@@ -226,9 +226,6 @@
           <a-button type="primary" html-type="submit"> Create </a-button>
         </a-form-item>
       </a-form>
-    </div>
-    <div v-else class="container login">
-      <sign-in></sign-in>
     </div>
   </div>
 </template>
