@@ -56,7 +56,7 @@ export default {
   firebase: {
     config: {
       apiKey: 'AIzaSyBJbFtUL95rKri_xd-_EZtKEf7xlNc0-Jk',
-      authDomain: 'crusader-3cc51.firebaseapp.com',
+      authDomain: 'crusader.firebaseapp.com',
       projectId: 'crusader-3cc51',
       storageBucket: 'crusader-3cc51.appspot.com',
       messagingSenderId: '177105489838',
@@ -71,9 +71,9 @@ export default {
           subscribeManually: false,
         },
         ssr: false, // default
-        emulatorPort: 9099,
-        emulatorHost: 'http://localhost',
-        disableEmulatorWarnings: false,
+        // emulatorPort: 9099,
+        // emulatorHost: 'http://localhost',
+        // disableEmulatorWarnings: false,
       },
       firestore: true,
       functions: false,
