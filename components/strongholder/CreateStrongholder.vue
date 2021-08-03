@@ -265,8 +265,8 @@ export default {
               sh: values,
             })
             this.$message.success(`Stronghold Created!`)
-            setTimeout(() => {
-              // window.location.href = 'combatLog'
+            setTimeout(async () => {
+              await this.$store.commit('TOGGLE_creatingStrongholder', {})
             }, 0)
           } catch (e) {
             console.error(e)
