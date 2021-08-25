@@ -1,11 +1,13 @@
 <template>
   <div class="orderOfBattleRoot">
-    <a-table
-      :columns="columns"
-      :data-source="tableData"
-      bordered
-      @onChange="handleTableChange"
-    >
+    <EditUnit
+      :key="editingKey"
+      :visible="editingUnit"
+      :close="onClose"
+      :save="save"
+      :unit="currentUnit"
+    ></EditUnit>
+    <a-table :columns="columns" :data-source="tableData" bordered>
       <template slot="title" slot-scope="currentPageData">
         <div class="tableHeader"><h3>Order of Battle</h3></div>
       </template>
@@ -64,6 +66,7 @@
 
 <script lang="ts">
 import _ from 'lodash'
+import EditUnit from '@/components/strongholder/EditUnit.vue'
 const columns = [
   {
     title: 'Name',
@@ -98,6 +101,7 @@ const columns = [
 ]
 
 export default {
+  components: { EditUnit },
   props: ['stronghold'],
   data() {
     this.cacheData = this.stronghold.OrderOfBattle.map((item) => ({ ...item }))
@@ -106,11 +110,20 @@ export default {
       creatingNewRow: false,
       columns,
       tableData: this.stronghold.OrderOfBattle.map((item) => ({ ...item })),
+      currentUnit: {},
+      editingUnit: false,
     }
   },
   methods: {
-    handleTableChange(v) {
-      console.log(v)
+    showDrawer(key, unit) {
+      this.editingKey = key
+      this.editingUnit = true
+      this.currentUnit = unit
+    },
+    onClose() {
+      this.editingKey = ''
+      this.editingUnit = false
+      this.currentUnit = {}
     },
     handleChange(value, key, column) {
       const newData = [...this.tableData]
@@ -124,24 +137,27 @@ export default {
       const newData = [...this.tableData]
       const target = newData.filter((item) => key === item.key)[0]
       this.editingKey = key
-      if (target) {
-        target.editable = true
-        this.tableData = newData
-      }
+      this.showDrawer(key, target)
     },
-    async save(key) {
+    async save(values) {
       try {
         const newData = [...this.tableData]
         const newCacheData = [...this.cacheData]
-        const target = newData.filter((item) => key === item.key)[0]
-        const targetCache = newCacheData.filter((item) => key === item.key)[0]
+        const target = newData.filter((item) => this.editingKey === item.key)[0]
+        const targetCache = newCacheData.filter(
+          (item) => this.editingKey === item.key
+        )[0]
 
-        target.key = target.Name
+        console.log(this.editingKey)
+        console.log(target)
+        console.log(values)
+
+        values.key = values.Name
+        Object.assign(target, { ...values })
         if (target.key === 'New Row') {
           this.$message.error(`Please give your row a different name`)
           return false
         }
-
         if (target && targetCache) {
           delete target.editable
           this.tableData = newData
@@ -150,6 +166,8 @@ export default {
         }
         this.editingKey = ''
         this.creatingNewRow = false
+        this.currentUnit = {}
+        this.editingUnit = false
         await this.$store.dispatch('ACTION_saveOOB', {
           stronghold: this.stronghold,
           OOB: this.tableData,

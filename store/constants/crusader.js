@@ -1,4 +1,5 @@
 export default {
+  UNIT_TYPES: ['Hero', 'Wizard', 'Battleline', 'Other', 'Monster', 'Artillary'],
   STRONGHOLD_TYPES: ['Type A', 'Type B', 'Type C'],
   STARTING_SIZES: ['Vanguard', 'Medium', 'Large'],
   REALMS: [

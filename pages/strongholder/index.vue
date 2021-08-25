@@ -1,5 +1,27 @@
 <template>
   <div id="strongholderRoot" class="strongholderRoot">
+    <a-breadcrumb>
+      <a-breadcrumb-item href="">
+        <NuxtLink to="/"><a-icon type="home" /></NuxtLink>
+      </a-breadcrumb-item>
+      <a-breadcrumb-item href="/strongholder">
+        <span
+          @click="
+            () => {
+              selectStronghold(null)
+              if (creatingStrongholder) toggleCreating()
+            }
+          "
+          >Strongholds</span
+        >
+      </a-breadcrumb-item>
+      <a-breadcrumb-item v-if="activeStronghold">{{
+        activeStronghold['Army Name']
+      }}</a-breadcrumb-item>
+      <a-breadcrumb-item v-if="creatingStrongholder"
+        ><span>Creating...</span></a-breadcrumb-item
+      >
+    </a-breadcrumb>
     <div class="container">
       <div
         v-if="creatingStrongholder"
